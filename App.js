@@ -10,6 +10,8 @@ import { useFonts } from "expo-font";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useColorScheme } from "@/components/useColorScheme";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AppRegistry } from 'react-native';
+
 import * as SplashScreen from "expo-splash-screen";
 // import Amplify from "aws-amplify";
 // import config from "./src/aws-exports";
@@ -65,4 +67,6 @@ function App() {
   }
 }
 
-export default registerRootComponent(App);
+AppRegistry.registerComponent('main', () => App);
+
+export default App;
