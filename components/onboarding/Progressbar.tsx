@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
 
-const ProgressBar = ({ activeSection }: { activeSection: number }) => {
+const ProgressBar = ({ activeSection, totalSections  }: { activeSection: number, totalSections: number  }) => {
   const animatedValue = useRef(new Animated.Value(0)).current; 
 
   useEffect(() => {
@@ -20,9 +20,11 @@ const ProgressBar = ({ activeSection }: { activeSection: number }) => {
     });
   };
 
+  const sectionsArray = Array.from({ length: totalSections }, (_, i) => i + 1);
+
   return (
     <View style={styles.container}>
-      {[1, 2, 3, 4].map((section, index) => (
+      {sectionsArray.map((section, index) => (
         <View key={index} style={styles.sectionContainer}>
           <Animated.View
             style={[

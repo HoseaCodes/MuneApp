@@ -1,18 +1,55 @@
 import React, { useState } from 'react'
-import { View, Text, FlatList, Button } from 'react-native'
-import { OnboardingCard } from './OnboardingCard'
+import { View, Text, Button, PanResponder } from 'react-native';
+import OnboardingCard from './OnboardingCard'
 import ProgressBar from './Progressbar';
 
 export default function OnboardingComponent({navigation}: {navigation: any}) {
-    const [activeSection, setActiveSection] = useState(2);
+    const [activeSection, setActiveSection] = useState(0);
+    const cards = [
+        {
+            src: require('../../assets/videos/black-man-paying-with-credit-card-and-cell-phone-s-2023-11-27-05-33-05-utc.mp4'),
+            isVideo: true,
+        }, 
+        {
+            src: require('../../assets/images/iPhone 14 Pro.png'),
+            isVideo: false,
+        },
+        {
+            src: require('../../assets/videos/mun-eprototypevideo desktop.mp4'),
+            isVideo: true,
+        },
+        {
+            src: require('../../assets/images/Mockup.png'),
+            isVideo: false,
+        }
+    ]
 
     const nextSection = () => {
-        setActiveSection((prev) => (prev < 5 ? prev + 1 : 5));
+        setActiveSection((prev) => (prev < cards.length - 1 ? prev + 1 : prev));
     };
 
     const backSection = () => {
-        setActiveSection((prev) => (prev > 2 ? prev - 1 : 2));
+        setActiveSection((prev) => (prev > 0 ? prev - 1 : prev));
     };
+
+    // Handle swipe gestures
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (evt, gestureState) => {
+            const { dx } = gestureState; // dx is the change in x direction
+            if (dx < -50) {
+                // Swipe left - go to next section
+                nextSection();
+            } else if (dx > 50) {
+                // Swipe right - go to previous section
+                backSection();
+            }
+        },
+        onPanResponderRelease: () => {
+            // This can be used to handle anything when the user releases the touch
+        },
+    });
 
 
     return (
@@ -23,26 +60,23 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             padding: 20,
             alignItems: "center",
             gap: 20
-            }}>
+            }}
+            {...panResponder.panHandlers}
+            >
             <Text>Logo</Text>
-            <ProgressBar activeSection={activeSection} />
-            <View style={{ marginVertical: 20 }}>
-                <Button title="Next Section" onPress={nextSection} />
-                <Button title="Back Section" onPress={backSection} />
-            </View>
-            <FlatList
-                data={[{etag: '1', title: 'title', description: 'description'}, {etag: '2', title: 'title', description: 'description'}]}
-                keyExtractor={(item) => item.etag}
-                renderItem={OnboardingCard}
+            <ProgressBar activeSection={activeSection + 2} totalSections={cards.length} />
+            <OnboardingCard
+                backgroundSource={cards[activeSection].src}
+                isVideo={cards[activeSection].isVideo}
             />
-            <Button
+            {/* <Button
                 title="Sign Up"
                 onPress={() => navigation.navigate('Signup')}
-            />
-            <Button
+            /> */}
+            {/* <Button
                 title="Log in"
                 onPress={() => navigation.navigate('Login')}
-            />
+            /> */}
         </View>
     )
 }
