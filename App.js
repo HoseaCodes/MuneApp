@@ -26,6 +26,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
 import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
+import MFAScreen from "./src/screens/MFAScreen";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -60,6 +61,7 @@ function App() {
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
+            <Stack.Screen name="MFA" component={MFAScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
           </Stack.Navigator>

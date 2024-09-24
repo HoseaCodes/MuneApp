@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 
-const PhoneLoginScreen = () => {
+const PhoneLoginScreen = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false);
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -49,8 +50,14 @@ const PhoneLoginScreen = () => {
         validatePassword(input);
     };
 
-    const isFormValid = () => {
-        return validateEmailOrPhone(email) && validatePassword(password);
+    const handleIsFormValid = () => {
+        if (validateEmailOrPhone(email) && validatePassword(password)) {
+            setIsFormValid(true);
+            navigation.navigate('MFA');
+        } else {
+            setIsFormValid(false);
+        }
+        
     };
 
     return (
@@ -94,7 +101,9 @@ const PhoneLoginScreen = () => {
                 </View>
             </View>
             <TouchableOpacity style={styles.continueButton}
-                onPress={isFormValid}
+                onPress={handleIsFormValid}
+                // onPress={() => navigation.navigate('MFA')}
+                disabled={!isFormValid && !email && !password}
             >
                 <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity>
