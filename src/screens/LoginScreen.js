@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button } from "react-native";
 import { Auth } from "aws-amplify";
+import LoginComponent from "../../components/login/LoginComponent";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View>
+      <LoginComponent navigation={navigation} />
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
       <TextInput
         placeholder="Password"
