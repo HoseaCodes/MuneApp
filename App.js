@@ -29,6 +29,7 @@ import RegisterScreen from "./src/screens/RegisterScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
 import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
 import MFAScreen from "./src/screens/MFAScreen";
+import TransactionScreen from "./src/screens/TransactionScreen";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -116,7 +117,7 @@ function App() {
           },
         })}
       >
-        <Tab.Screen name="Home" component={OnboardingScreen} />
+        <Tab.Screen name="Transactions" options={{ headerShown: false }}   component={TransactionScreen} />
         <Tab.Screen name="Education" component={DashboardScreen} />
         <Tab.Screen name="Transfer" component={PhoneLoginScreen} />
         <Tab.Screen name="Money" component={MFAScreen} />
@@ -151,7 +152,7 @@ function App() {
             <Stack.Screen name="MFA" component={MFAScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
             {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
-            <Stack.Screen name="Dashboard" component={Tabs} />
+            <Stack.Screen name="Dashboard" options={{ headerShown: false }}  component={Tabs} />
 
           </Stack.Navigator>
         </NavigationContainer>
