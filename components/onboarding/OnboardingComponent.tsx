@@ -77,6 +77,10 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
                 title="Log in"
                 onPress={() => navigation.navigate('Login')}
             />
+            <Button
+                title="Dashboard"
+                onPress={() => navigation.navigate('Dashboard')}
+            />
         </View>
     )
 }
