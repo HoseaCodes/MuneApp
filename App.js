@@ -30,6 +30,7 @@ import DashboardScreen from "./src/screens/DashboardScreen";
 import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
 import MFAScreen from "./src/screens/MFAScreen";
 import TransactionScreen from "./src/screens/TransactionScreen";
+import TransactionDetailScreen from "./src/screens/TransactionDetailScreen";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -95,10 +96,10 @@ function App() {
             };
   
             switch (route.name) {
-              case 'Home':
+              case 'Transactions':
                 iconName = 'building';
                 break;
-              case 'Education':
+              case 'TransactionDetails':
                 iconName = 'graduation-cap';
                 break;
               case 'Transfer':
@@ -118,7 +119,7 @@ function App() {
         })}
       >
         <Tab.Screen name="Transactions" options={{ headerShown: false }}   component={TransactionScreen} />
-        <Tab.Screen name="Education" component={DashboardScreen} />
+        <Tab.Screen name="TransactionDetail"  options={{ headerShown: false }}  component={TransactionDetailScreen} />
         <Tab.Screen name="Transfer" component={PhoneLoginScreen} />
         <Tab.Screen name="Money" component={MFAScreen} />
         <Tab.Screen name="Search" component={RegisterScreen} />
@@ -151,6 +152,7 @@ function App() {
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
             <Stack.Screen name="MFA" component={MFAScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="TransactionDetails" options={{headerShown: false}} component={TransactionDetailScreen} />
             {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
             <Stack.Screen name="Dashboard" options={{ headerShown: false }}  component={Tabs} />
 

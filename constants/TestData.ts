@@ -102,3 +102,36 @@ const getDateThreeDaysAgo = () => {
         "nudged": false 
     }
 ];
+
+export const usertransactions = [
+    {
+        "user": {
+          "name": "Chris Johnson",
+          "avatar": require('../assets/images/lgChris.png'),
+          "username": "@ChrisJ",
+          "createdDate": "January 21, 2025",
+          "amount": "$6.00",
+          "image": "lgChris.png"
+        }
+    }
+      
+]
+
+export const userpurchases = [
+    {
+        "merchant": "Best Buy",
+        "date": "January 24, 2024",
+        "amount": "$150.87",
+        "image": require('../assets/images/bestbuy.png')
+    }
+]
+
+export const userdetails = {
+    "title": "January 24, 2024",
+    "amount": "$6.00",
+    "source": "Visa",
+    "identifier": "45FKG3W",
+    "to": "@ChrisJ",
+    "from": "@JohnnyBoy",
+    "supportText": "Mun-e support"
+  }
