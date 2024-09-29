@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { View, TextInput, Button, Image } from "react-native";
-import { Auth, API, graphqlOperation, Storage } from "aws-amplify";
+import React from "react";
+import { StyleSheet, Image, SafeAreaView, View, Text, ScrollView } from "react-native";
+import UserProfile from "../../components/profile/UserProfile";
+import MemberProfile from "../../components/profile/MemberProfile";
 
 const ProfileScreen = () => {
-  const [user, setUser] = useState(null);
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [photo, setPhoto] = useState("");
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userInfo = await Auth.currentAuthenticatedUser();
-      setUser(userInfo);
-      // Fetch user profile from API and set the state
-    };
-    fetchUser();
-  }, []);
-
-  const handleUpdateProfile = async () => {
-    try {
-      // Update user profile in the API
-    } catch (error) {
-      console.log("Error updating profile:", error);
-    }
-  };
-
+  const type = "member";
+  // const type = "profile";
   return (
-    <View>
-      <TextInput placeholder="Name" value={name} onChangeText={setName} />
-      <TextInput placeholder="Bio" value={bio} onChangeText={setBio} />
-      <Button title="Update Profile" onPress={handleUpdateProfile} />
-      <Image source={{ uri: photo }} style={{ width: 100, height: 100 }} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        {
+          type === "member" ? (
+            <MemberProfile />
+          ) : (
+            <UserProfile />
+          )
+        }
+      </ScrollView>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
+
 
 export default ProfileScreen;
