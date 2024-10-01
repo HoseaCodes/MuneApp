@@ -1,6 +1,8 @@
 import { View, Text, FlatList, Button } from 'react-native'
 import React from 'react'
 import { OnboardingCard } from './OnboardingCard'
+import SignUpButton from '../SignUpButton';
+import { styled } from 'nativewind';
 
 export default function OnboardingComponent({navigation}: {navigation: any}) {
     return (
@@ -12,9 +14,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
                 keyExtractor={(item) => item.etag}
                 renderItem={OnboardingCard}
             />
-            <Button
-                title="Sign Up"
-                onPress={() => navigation.navigate('Signup')}
+            <SignUpButton onPress={() => navigation.navigate('Signup')}
             />
             <Button
                 title="Log in"
