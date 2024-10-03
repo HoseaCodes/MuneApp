@@ -1,20 +1,28 @@
 name: Sandbox Pipeline
 
-on:
-  push:
-    branches-ignore:
-      - main
-      - master
-      - development
-      - staging
-  pull_request:
-    branches-ignore:
-      - main
-      - master
-      - development
-      - staging
+# on:
+#   push:
+#     branches-ignore:
+#       - main
+#       - master
+#       - development
+#       - staging
+#   pull_request:
+#     branches-ignore:
+#       - main
+#       - master
+#       - development
+#       - staging
   
-  workflow_dispatch:   
+#   workflow_dispatch:   
+
+on:
+  pull_request:
+    branches:
+      - '*'  # Triggers on pull requests to any branch
+    types: [opened, reopened, synchronize]  # Only triggers on specific pull request events
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
 
 permissions:
   pull-requests: write
