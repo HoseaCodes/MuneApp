@@ -35,7 +35,7 @@ jobs:
       run: npm install --legacy-peer-deps
 
     - name: Log in to Expo
-      run: npx expo login --non-interactive --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
+      run: npx expo login --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
 
     - name: Build Expo iOS project
       run: npx expo build:ios --non-interactive
