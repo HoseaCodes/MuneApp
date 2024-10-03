@@ -192,7 +192,14 @@ jobs:
     - name: Set EAS Channel
       run: |
         CHANNEL_NAME="feature/${{ steps.PR.outputs.number || github.event.number }}"
-        eas channel:edit $CHANNEL_NAME --branch ${{ steps.PR.outputs.number || github.event.number }}"
+        
+        # Check if the channel exists
+        if eas channel:list | grep -q "$CHANNEL_NAME"; then
+          echo "Channel '$CHANNEL_NAME' already exists."
+        else
+          echo "Channel '$CHANNEL_NAME' does not exist. Creating it..."
+          eas channel:create "$CHANNEL_NAME" --branch "${{ steps.PR.outputs.number || github.event.number }}"
+        fi
 
     # Step 6: Generate Manifest URL
     - name: Generate Manifest URL
