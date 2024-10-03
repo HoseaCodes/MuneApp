@@ -76,6 +76,11 @@ jobs:
     - name: Install EAS CLI
       run: npm install -g eas-cli
 
+    - name: EAS Login
+      run: |
+        echo "Logging into EAS with username and password..."
+        npx eas login --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
+
     # Step 4: Deploy to the appropriate branch using EAS CLI
     - name: Run EAS Update
       run: |
