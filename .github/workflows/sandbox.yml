@@ -178,10 +178,11 @@ jobs:
       run: |
         echo "message=**The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)
 
-        | Name | Status | Preview | Comments | Updated (UTC) |
-        | :--- | :----- | :------ | :------- | :------ |
-        | **Manifest URL** | 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()  | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
-        | **Deep Link** | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |" >> $GITHUB_ENV
+        | Name            | Status                                              | Preview                                    | Comments                | Updated (UTC)                     |
+        | :-------------- | :--------------------------------------------------| :----------------------------------------- | :--------------------- | :-------------------------------- |
+        | **Manifest URL**| 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()                       | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
+        | **Deep Link**   | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |" >> $GITHUB_ENV
+
 
     # Post QR Code URL as a comment on the pull request (Optional)
     - name: Post QR Code as PR comment
