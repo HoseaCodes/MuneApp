@@ -15,42 +15,32 @@ on:
       - staging
 
 jobs:
-  build:
+  preview:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
 
-    - name: Install dependencies
-      run: npm install --legacy-peer-deps
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      
+      - name: 📦 Install dependencies
+        run: yarn install
 
-    - name: Install EAS CLI
-      run: npm install -g eas-cli
-
-    - name: Log in to Expo
-      run: npx expo login --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
-
-    - name: Build Expo iOS project
-      run: eas build -p ios --profile release --team ${{ secrets.APPLE_TEAM_ID }}
-      env:
-        EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} 
-        EXPO_ORG: 'mun-e'
-
-    # - name: Build Expo Android project
-    #   run: eas build -p android --non-interactive --profile release --team <your-team-id>
-    #   env:
-    #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-    #     EXPO_ORG: 'mun-e'
+      - name: 🚀 Create preview
+        uses: expo/expo-github-action/preview@v8
+        with:
+          command: eas update --auto --branch ${{ github.event.pull_request.head.ref }}
 
     # - name: Run Tests
     #   run: npm test
@@ -58,35 +48,13 @@ jobs:
     # - name: Lint Code
     #   run: npm run lint 
 
-    - name: Cache node_modules
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-
-    - name: Upload iOS build artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ios-build
-        path: ./ios-build
-    
-    # - name: Upload Android build artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: android-build
-    #     path: ./android-build
-
-    - name: Deploy to Expo
-      run: npx expo publish --owner mun-e
-      env:
-        EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-    - name: Generate Expo QR code link
-      run: npx expo url:qr --owner mun-e
-      env:
-        EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
   # notify:
   #   runs-on: ubuntu-latest
