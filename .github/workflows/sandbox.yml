@@ -20,26 +20,29 @@ permissions:
   pull-requests: write
 
 jobs:
-  # linter:
-  #   runs-on: ubuntu-latest
+  linter:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: 🏗 Setup repo
-  #       run: |
-  #         echo "Running linter"
+    steps:
+      - name: 🏗 Setup repo
+        run: |
+          echo "Running linter"
   
-  # unittests:
-  #   needs: linter
-  #   runs-on: ubuntu-latest
+  unittests:
+    needs: linter
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: 🏗 Setup repo
-  #       run: |
-  #         echo "Running unit tests"
+    steps:
+      - name: 🏗 Setup repo
+        run: |
+          echo "Running unit tests"
 
   generate-qr-code:
     runs-on: ubuntu-latest
-    # needs: unittests
+    needs: unittests
+
+    outputs:
+      slack_message: ${{ env.message }}
 
     steps:
     - name: Checkout code
@@ -50,19 +53,19 @@ jobs:
       with:
         node-version: 18.x
 
-    # - name: Check for code changes in src folder
-    #   id: check_changes
-    #   run: |
-    #     # Fetch the previous commit
-    #     git fetch origin ${{ github.event.before }}
+    - name: Check for code changes in src folder
+      id: check_changes
+      run: |
+        # Fetch the previous commit
+        git fetch origin ${{ github.event.before }}
         
-    #     # Check for changes in the src folder
-    #     if [[ -z $(git diff --name-only origin/${{ github.event.base.ref }} HEAD -- src/) ]]; then
-    #       echo "No changes detected in src folder. Exiting..."
-    #       exit 78 # Exit with neutral status
-    #     fi
+        # Check for changes in the src folder
+        if [[ -z $(git diff --name-only origin/${{ github.event.base.ref }} HEAD -- src/) ]]; then
+          echo "No changes detected in src folder. Exiting..."
+          exit 78 # Exit with neutral status
+        fi
 
-    #     echo "Changes detected in src folder. Proceeding..."
+        echo "Changes detected in src folder. Proceeding..."
 
     - name: Install Dependencies
       run: npm install --legacy-peer-deps 
@@ -204,6 +207,8 @@ jobs:
     - name: Post QR Code as PR comment
       uses: marocchino/sticky-pull-request-comment@v2
       with:
+        hide_and_recreate: true
+        hide_classify: "OUTDATED"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         number: ${{ steps.PR.outputs.number || github.event.number }}
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -222,7 +227,7 @@ jobs:
           SLACK_CHANNEL: 'pull-requests'
           SLACK_INCOMING_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
           SLACK_TITLE: ${{ github.event.pull_request.title }}
-          SLACK_MESSAGE: ${{ env.message }}
+          SLACK_MESSAGE: ${{ needs.generate-qr-code.outputs.slack_message }}
           SLACK_USERNAME: 'mun-e-bot'
 
   # linear_webhook:
