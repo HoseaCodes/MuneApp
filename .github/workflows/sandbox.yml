@@ -17,10 +17,6 @@ name: Sandbox Pipeline
 #   workflow_dispatch:   
 
 on:
-  pull_request:
-    branches:
-      - '*'  # Triggers on pull requests to any branch
-    types: [opened, reopened, synchronize]  # Only triggers on specific pull request events
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 
@@ -51,6 +47,20 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
 
     steps:
+    - name: Check for code changes in src folder
+      id: check_changes
+      run: |
+        # Fetch the previous commit
+        git fetch origin ${{ github.event.before }}
+        
+        # Check for changes in the src folder
+        if [[ -z $(git diff --name-only origin/${{ github.event.base.ref }} HEAD -- src/) ]]; then
+          echo "No changes detected in src folder. Exiting..."
+          exit 78 # Exit with neutral status
+        fi
+
+        echo "Changes detected in src folder. Proceeding..."
+
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -185,11 +195,10 @@ jobs:
       id: prepare-message
       run: |
         echo "message=**The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)
-
         | Name            | Status                                              | Preview                                    | Comments                | Updated (UTC)                     |
         | :-------------- | :--------------------------------------------------| :----------------------------------------- | :--------------------- | :-------------------------------- |
-        | **Manifest URL**| 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()                       | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
-        | **Deep Link**   | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |" >> $GITHUB_ENV
+        | **Manifest URL**| 🔗 [View Manifest](https://u.expo.dev/27339099-a190-412f-b17c-40dfb90ea4c9?channel-name=) | ✅ Ready [Inspect]()                       | 💬 [**Add feedback**]() | 2024-10-03 09:20:10 |
+        | **Deep Link**   | 🔗 [Open Deep Link](https://expo.dev/preview/update?message=&updateRuntimeVersion=1.0.0&createdAt=2024-10-03T09:20:08.650Z&slug=exp&projectId=27339099-a190-412f-b17c-40dfb90ea4c9&group=61ccc202-29ec-4114-a408-b9a715255561) | ![QR Code](https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=https%3A%2F%2Fexpo.dev%2Fpreview%2Fupdate%3Fmessage%3D%26updateRuntimeVersion%3D1.0.0%26createdAt%3D2024-10-03T09%3A20%3A08.650Z%26slug%3Dexp%26projectId%3D27339099-a190-412f-b17c-40dfb90ea4c9%26group%3D61ccc202-29ec-4114-a408-b9a715255561&qzone=1&margin=0&size=500x500&ecc=L) | 💬 [**Add feedback**]() | 2024-10-03 09:20:10 |" >> $GITHUB_ENV
 
 
     # Post QR Code URL as a comment on the pull request (Optional)
