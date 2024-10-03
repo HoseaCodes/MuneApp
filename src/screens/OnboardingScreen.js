@@ -23,7 +23,6 @@ const OnboardingScreen = ({ navigation }) => {
       >
         Welcome to Mun-e!
       </Text>
-
       {/* Replacing Button with TouchableOpacity to apply custom styling */}
       <TouchableOpacity
         style={{
