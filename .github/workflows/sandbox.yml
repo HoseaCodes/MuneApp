@@ -38,13 +38,13 @@ jobs:
       run: npx expo login --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
 
     - name: Build Expo iOS project
-      run: npx expo build:ios --non-interactive
+      run: npx expo build:ios
       env:
         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} 
         EXPO_ORG: 'mun-e'
 
     - name: Build Expo Android project
-      run: npx expo build:android --non-interactive
+      run: npx expo build:android
       env:
         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         EXPO_ORG: 'mun-e'
@@ -76,7 +76,7 @@ jobs:
         path: ./android-build
 
     - name: Deploy to Expo
-      run: npx expo publish --non-interactive --owner mun-e
+      run: npx expo publish --owner mun-e
       env:
         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
