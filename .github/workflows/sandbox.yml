@@ -250,7 +250,7 @@ jobs:
         
         echo "::set-output name=preview_link::$PREVIEW_LINK"
 
-    # Step 6: Generate Manifest URL
+    # Generate Manifest URL
     - name: Generate Manifest URL
       id: generate-manifest-url
       run: |
@@ -258,7 +258,7 @@ jobs:
         MANIFEST_URL="https://u.expo.dev/${EAS_PROJECT_ID}?channel-name=${CHANNEL_NAME}"
         echo "::set-output name=manifest_url::$MANIFEST_URL"
 
-    # Step 7: Generate Deep Link URL
+    # Generate Deep Link URL
     - name: Generate Deep Link URL
       id: generate-deep-link
       run: |
@@ -268,15 +268,22 @@ jobs:
         DEEP_LINK=$PREVIEW_LINK
         echo "::set-output name=deep_link::$DEEP_LINK"
 
-    # Step 8: Generate QR Code from Deep Link
+    # Generate QR Code from Deep Link
     - name: Generate QR Code
       id: generate-qr-code
       run: |
         DEEP_LINK="${{ steps.generate-deep-link.outputs.deep_link }}"
-        QR_CODE_URL="http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=${DEEP_LINK}&qzone=1&margin=0&size=500x500&ecc=L"
+        
+        # URL encode the DEEP_LINK
+        ENCODED_DEEP_LINK=$(echo -n "$DEEP_LINK" | jq -sRr @uri)
+        
+        # Construct the QR Code URL
+        QR_CODE_URL="https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=${ENCODED_DEEP_LINK}&qzone=1&margin=0&size=500x500&ecc=L"
+        
+        # Set the output variable
         echo "::set-output name=qr_code_url::$QR_CODE_URL"
 
-    # Step 9: Upload the QR code as an artifact (Optional)
+    # Upload the QR code as an artifact (Optional)
     - name: Upload QR Code Artifact
       uses: actions/upload-artifact@v3
       with:
