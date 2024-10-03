@@ -27,6 +27,13 @@ jobs:
         with:
           node-version: 18.x
           cache: yarn
+      
+      - name: 🛠️ Patch system watchers for 'ENOSPC' error
+        run: |
+          sudo sysctl -w fs.inotify.max_user_instances=524288
+          sudo sysctl -w fs.inotify.max_user_watches=524288
+          sudo sysctl -w fs.inotify.max_queued_events=524288
+          sudo sysctl -p
 
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
