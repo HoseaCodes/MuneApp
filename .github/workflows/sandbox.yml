@@ -1,24 +1,20 @@
 name: Sandbox Pipeline
 
-# on:
-#   push:
-#     branches-ignore:
-#       - main
-#       - master
-#       - development
-#       - staging
-#   pull_request:
-#     branches-ignore:
-#       - main
-#       - master
-#       - development
-#       - staging
-  
-#   workflow_dispatch:   
-
 on:
-  workflow_dispatch:  # Allows manual triggering of the workflow
-
+  push:
+    branches-ignore:
+      - main
+      - master
+      - development
+      - staging
+  pull_request:
+    branches-ignore:
+      - main
+      - master
+      - development
+      - staging
+  
+  workflow_dispatch:   
 
 permissions:
   pull-requests: write
