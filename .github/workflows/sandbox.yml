@@ -60,16 +60,11 @@ jobs:
 
       - name: 📜 Run EAS Update and Capture Output
         id: eas-update
-        run: |
-          pwd
-          ls -a
-          scripts/run-eas-update.sh "${{ github.event.pull_request.head.ref }}"
+        run: eas-update:list --branch ${{ github.event.pull_request.head.ref }}
 
-      - name: 📝 Comment on Pull Request
-        run: |
-          if [ -n "${{ steps.eas-update.outputs.url }}" ]; then
-              gh pr comment ${{ github.event.pull_request.number }} --body "EAS Dashboard update available: ${{ steps.eas-update.outputs.url }}"
-          fi
+      # - name: 📝 Comment on Pull Request
+      #   run: |
+      #     gh pr comment ${{ github.event.pull_request.number }} --body "EAS Dashboard update available: ${{ steps.eas-update.outputs.url }}"
             
     # - name: Run Tests
     #   run: npm test
