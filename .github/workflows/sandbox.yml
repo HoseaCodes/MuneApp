@@ -220,7 +220,7 @@ jobs:
         echo "Updated (UTC): $(date -u +"%Y-%m-%d %H:%M:%S")" >> project_update.txt
 
     - name: Upload Project Update
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: project-update
         path: project_update.txt
