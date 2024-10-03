@@ -133,7 +133,7 @@ jobs:
       uses: marocchino/sticky-pull-request-comment@v2
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        number: ${{ github.event.number }}
+        number: ${{ github.event.pull_request.number || 123 }}
         token: ${{ secrets.GITHUB_TOKEN }}
         header: "EAS Update QR Code"
         message: |
