@@ -44,6 +44,14 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: 🚀 Create preview
         uses: expo/expo-github-action/preview@v8
         with:
@@ -52,21 +60,16 @@ jobs:
 
       - name: 📜 Run EAS Update and Capture Output
         id: eas-update
-        run: ../../scripts/run-eas-update.sh "${{ github.event.pull_request.head.ref }}"
+        run: |
+          pwd
+          ls -a
+          scripts/run-eas-update.sh "${{ github.event.pull_request.head.ref }}"
 
       - name: 📝 Comment on Pull Request
         run: |
           if [ -n "${{ steps.eas-update.outputs.url }}" ]; then
               gh pr comment ${{ github.event.pull_request.number }} --body "EAS Dashboard update available: ${{ steps.eas-update.outputs.url }}"
           fi
-
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
             
     # - name: Run Tests
     #   run: npm test
