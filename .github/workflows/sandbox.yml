@@ -82,8 +82,7 @@ jobs:
     # Step 4: Deploy to the appropriate branch using EAS CLI
     - name: Run EAS Update
       run: |
-        eas update --branch ${{ github.event.pull_request.head.ref }} --message "Deployed commit: ${{ github.sha }}"
-
+        eas update --auto --branch ${{ github.event.pull_request.head.ref }}
     # Step 5: Set channel to the branch (this assumes channel name matches branch)
     - name: Set EAS Channel
       run: |
