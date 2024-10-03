@@ -47,8 +47,8 @@ jobs:
       - name: 🚀 Create preview
         uses: expo/expo-github-action/preview@v8
         with:
-          command: |
-            eas update --auto --branch ${{ github.event.pull_request.head.ref }} || echo "EAS update failed"
+          command: eas update --auto --branch ${{ github.event.pull_request.head.ref }}
+        continue-on-error: true
 
       - name: 📜 Run EAS Update and Capture Output
         id: eas-update
