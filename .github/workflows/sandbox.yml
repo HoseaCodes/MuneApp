@@ -158,17 +158,14 @@ jobs:
     # if: ${{ github.event_name == 'workflow_dispatch' }}
 
     steps:
-    # Step 1: Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Set up Node.js environment
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
 
-    # Step 3: Install dependencies
     - name: Install Dependencies
       run: npm install --legacy-peer-deps 
 
@@ -184,21 +181,11 @@ jobs:
 
     # Set channel to the branch (this assumes channel name matches branch)
     - name: Set EAS Channel
-      run: |
-        CHANNEL_NAME="feature/${{ steps.PR.outputs.number || github.event.number }}"
-        
-        # Check if the channel exists
-        if eas channel:list | grep -q "$CHANNEL_NAME"; then
-          echo "Channel '$CHANNEL_NAME' already exists."
-        else
-          echo "Channel '$CHANNEL_NAME' does not exist. Creating it..."
-          eas channel:create "feature/${{ steps.PR.outputs.number || github.event.number }}"
-        fi
+      run: eas channel:create "feature/${{ steps.PR.outputs.number || github.event.number }}"
 
     - name: Run EAS Update
       run: |
         eas update --auto --branch "feature/${{ steps.PR.outputs.number || github.event.number }}"
-
 
     # Step 6: Generate Manifest URL
     - name: Generate Manifest URL
