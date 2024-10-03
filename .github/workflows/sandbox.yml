@@ -53,19 +53,33 @@ jobs:
       with:
         node-version: 18.x
 
-    - name: Check for code changes in src folder
-      id: check_changes
-      run: |
-        # Fetch the previous commit
-        git fetch origin ${{ github.event.before }}
+    # - name: Check for code changes in src folder
+    #   id: check_changes
+    #   run: |
+    #     # Fetch the previous commit
+    #     git fetch origin ${{ github.event.before }}
         
-        # Check for changes in the src folder
-        if [[ -z $(git diff --name-only origin/${{ github.event.base.ref }} HEAD -- src/) ]]; then
-          echo "No changes detected in src folder. Exiting..."
-          exit 78 # Exit with neutral status
-        fi
+    #     # Check for changes in the src folder
+    #     if [[ -z $(git diff --name-only origin/${{ github.event.base.ref }} HEAD -- src/) ]]; then
+    #       echo "No changes detected in src folder. Exiting..."
+    #       exit 78 # Exit with neutral status
+    #     fi
 
-        echo "Changes detected in src folder. Proceeding..."
+    #     echo "Changes detected in src folder. Proceeding..."
+    
+    - name: Get all test, doc and src files that have changed
+      id: changed-files-yaml
+      uses: tj-actions/changed-files@v45
+      with:
+        files_yaml: |
+          doc:
+            - '**.md'
+            - docs/**
+          test:
+            - test/**
+            - '!test/**.md'
+          src:
+            - src/**
 
     - name: Install Dependencies
       run: npm install --legacy-peer-deps 
