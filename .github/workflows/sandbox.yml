@@ -73,6 +73,9 @@ jobs:
         node-version: 18.x
 
     # Step 3: Install dependencies
+    - name: Install Dependencies
+      run: npm install --legacy-peer-deps 
+
     - name: Install EAS CLI
       run: npm install -g eas-cli
 
