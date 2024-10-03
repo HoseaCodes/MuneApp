@@ -52,20 +52,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-
-    # - name: Check for code changes in src folder
-    #   id: check_changes
-    #   run: |
-    #     # Fetch the previous commit
-    #     git fetch origin ${{ github.event.before }}
-        
-    #     # Check for changes in the src folder
-    #     if [[ -z $(git diff --name-only origin/${{ github.event.base.ref }} HEAD -- src/) ]]; then
-    #       echo "No changes detected in src folder. Exiting..."
-    #       exit 78 # Exit with neutral status
-    #     fi
-
-    #     echo "Changes detected in src folder. Proceeding..."
     
     - name: Get all test, doc and src files that have changed
       id: changed-files-yaml
@@ -240,7 +226,7 @@ jobs:
         env:
           SLACK_CHANNEL: 'pull-requests'
           SLACK_INCOMING_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
-          SLACK_TITLE: ${{ github.event.pull_request.title }}
+          SLACK_TITLE: ${{ github.event.pull_request.title || github.event.head_commit.message }}
           SLACK_MESSAGE: ${{ needs.generate-qr-code.outputs.slack_message }}
           SLACK_USERNAME: 'mun-e-bot'
 
