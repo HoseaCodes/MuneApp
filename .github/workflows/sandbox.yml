@@ -177,18 +177,12 @@ jobs:
 
     - name: Log in to Expo
       run: npx expo login --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
-
     
     - name: Get Pull Request Number
       uses: 8BitJonny/gh-get-current-pr@3.0.0
       id: PR
 
-    # Step 4: Deploy to the appropriate branch using EAS CLI
-    - name: Run EAS Update
-      run: |
-        eas update --auto --branch ${{ steps.PR.outputs.number || github.event.number }}
-
-    # Step 5: Set channel to the branch (this assumes channel name matches branch)
+    # Set channel to the branch (this assumes channel name matches branch)
     - name: Set EAS Channel
       run: |
         CHANNEL_NAME="feature/${{ steps.PR.outputs.number || github.event.number }}"
@@ -198,8 +192,13 @@ jobs:
           echo "Channel '$CHANNEL_NAME' already exists."
         else
           echo "Channel '$CHANNEL_NAME' does not exist. Creating it..."
-          eas channel:create "$CHANNEL_NAME" --branch "${{ steps.PR.outputs.number || github.event.number }}"
+          eas channel:create "feature/${{ steps.PR.outputs.number || github.event.number }}"
         fi
+
+    - name: Run EAS Update
+      run: |
+        eas update --auto --branch "feature/${{ steps.PR.outputs.number || github.event.number }}"
+
 
     # Step 6: Generate Manifest URL
     - name: Generate Manifest URL
