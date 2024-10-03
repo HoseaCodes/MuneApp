@@ -242,6 +242,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: generate-qr-code
     steps:
+      - name: Read project update file
+        id: read_file
+        run: echo "file_content=$(cat project_update.txt)" >> $GITHUB_OUTPUT
+
       - uses: actions/checkout@master
       - name: Slack Notification Demo
         uses: bryannice/gitactions-slack-notification@2.0.0
@@ -249,7 +253,7 @@ jobs:
           SLACK_CHANNEL: 'pull-requests'
           SLACK_INCOMING_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
           SLACK_TITLE: ${{ github.event.pull_request.title || github.event.head_commit.message }}
-          SLACK_MESSAGE: ${{ cat project_update.txt || needs.generate-qr-code.outputs.slack_message }}
+          SLACK_MESSAGE: ${{ steps.read_file.outputs.file_content || needs.generate-qr-code.outputs.slack_message }}
           SLACK_USERNAME: 'mun-e-bot'
 
   linear_webhook:
