@@ -13,13 +13,25 @@ on:
       - master
       - development
       - staging
+  
+  workflow_dispatch:   
 
 permissions:
   pull-requests: write
 
 jobs:
+  linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🏗 Setup repo
+        run: |
+          echo "Running linter"
+
   preview:
     runs-on: ubuntu-latest
+    needs: linter
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     
     steps:
       - name: 🏗 Setup repo
@@ -63,6 +75,8 @@ jobs:
 
   generate-qr-code:
     runs-on: ubuntu-latest
+    needs: linter
+    if: ${{ github.event_name == 'workflow_dispatch' }}
 
     steps:
     # Step 1: Checkout the code
