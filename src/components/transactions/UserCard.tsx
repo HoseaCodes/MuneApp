@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { getDaysAgo } from '@/utils/helperFunctions';
+import { getDaysAgo } from '../../utils/helperFunctions';
 
 const UserCard = ({ avatarUrl, firstName, lastName, purchaseDate, amount, made_payment, nudged }: { 
     avatarUrl: string; 
@@ -17,7 +17,7 @@ const UserCard = ({ avatarUrl, firstName, lastName, purchaseDate, amount, made_p
     return (
         <View style={styles.cardContainer}>
             <View style={styles.avatarContainer}>
-                <Image source={avatarUrl ? avatarUrl : require('../../assets/images/noImage.png')} style={styles.avatar} />
+                <Image source={avatarUrl ? avatarUrl : require('../../../assets/images/noImage.png')} style={styles.avatar} />
             </View>
             <View style={styles.userInfo}>
               <Text style={styles.userName}>{firstName} {lastName}</Text>
