@@ -82,20 +82,19 @@ jobs:
     # Step 4: Deploy to the appropriate branch using EAS CLI
     - name: Run EAS Update
       run: |
-        BRANCH_NAME="staging-${{ github.sha }}" # Adjust this based on your branch naming convention
-        eas update --branch $BRANCH_NAME --message "Deployed commit: ${{ github.sha }}"
+        eas update --branch ${{ github.event.pull_request.head.ref }} --message "Deployed commit: ${{ github.sha }}"
 
     # Step 5: Set channel to the branch (this assumes channel name matches branch)
     - name: Set EAS Channel
       run: |
         CHANNEL_NAME="staging-${{ github.sha }}"
-        eas channel:edit $CHANNEL_NAME --branch $BRANCH_NAME
+        eas channel:edit $CHANNEL_NAME --branch ${{ github.event.pull_request.head.ref }}
 
     # Step 6: Generate Manifest URL
     - name: Generate Manifest URL
       id: generate-manifest-url
       run: |
-        EAS_PROJECT_ID="your-eas-project-id" # Find this on the Expo website under project overview
+        EAS_PROJECT_ID="27339099-a190-412f-b17c-40dfb90ea4c9"
         MANIFEST_URL="https://u.expo.dev/${EAS_PROJECT_ID}?channel-name=${{ github.sha }}"
         echo "::set-output name=manifest_url::$MANIFEST_URL"
 
@@ -103,7 +102,7 @@ jobs:
     - name: Generate Deep Link URL
       id: generate-deep-link
       run: |
-        EXPO_SLUG="your-expo-slug"  # Find this in your app.json
+        EXPO_SLUG="MuneApp"
         MANIFEST_URL="${{ steps.generate-manifest-url.outputs.manifest_url }}"
         DEEP_LINK="exp+${EXPO_SLUG}://expo-development-client/?url=${MANIFEST_URL}"
         echo "::set-output name=deep_link::$DEEP_LINK"
