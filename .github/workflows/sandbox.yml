@@ -115,7 +115,7 @@ jobs:
 
     # Step 9: Upload the QR code as an artifact (Optional)
     - name: Upload QR Code Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: qr-code
         path: ${{ steps.generate-qr-code.outputs.qr_code_url }}
