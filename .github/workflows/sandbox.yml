@@ -52,24 +52,7 @@ jobs:
 
       - name: 📜 Run EAS Update and Capture Output
         id: eas-update
-        run: |
-          echo "Running EAS update on branch: ${{ github.event.pull_request.head.ref }}"
-          output=$(npx eas update --auto --branch ${{ github.event.pull_request.head.ref }} --json --non-interactive 2>&1)
-
-          echo "Log the full output for debugging"
-          echo "EAS update command output: $output"
-
-          echo "Extract the EAS Dashboard URL using grep"
-          eas_dashboard_url=$(echo "$output" | grep -o 'https://expo\.dev/accounts/[^ ]*/projects/[^ ]*/updates/[^ ]*')
-
-          echo "Check if the URL was found"
-          if [[ -n "$eas_dashboard_url" ]]; then
-              echo "EAS Dashboard update available: $eas_dashboard_url"
-              echo "::set-output name=url::$eas_dashboard_url"
-          else
-              echo "No EAS Dashboard URL found in output."
-              exit 1
-          fi
+        run: ../../scripts/run-eas-update.sh "${{ github.event.pull_request.head.ref }}"
 
       - name: 📝 Comment on Pull Request
         run: |
