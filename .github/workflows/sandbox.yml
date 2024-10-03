@@ -47,13 +47,34 @@ jobs:
       - name: 🚀 Create preview
         uses: expo/expo-github-action/preview@v8
         with:
-          command: eas update --auto --branch ${{ github.event.pull_request.head.ref }}
+          command: |
+            eas update --auto --branch ${{ github.event.pull_request.head.ref }} || echo "EAS update failed"
 
-    # - name: Run Tests
-    #   run: npm test
+      - name: 📜 Run EAS Update and Capture Output
+        id: eas-update
+        run: |
+          # Run the EAS update command and capture output
+          output=$(npx eas update --auto --branch ${{ github.event.pull_request.head.ref }} --json --non-interactive 2>&1)
 
-    # - name: Lint Code
-    #   run: npm run lint 
+          # Extract the EAS Dashboard URL using grep and sed
+          eas_dashboard_url=$(echo "$output" | grep -o 'https://expo\.dev/accounts/[^ ]*/projects/[^ ]*/updates/[^ ]*')
+
+          # Check if the URL was found
+          if [[ -n "$eas_dashboard_url" ]]; then
+              # Post the URL to the pull request
+              # Assuming you have the GitHub CLI installed and authenticated
+              echo "EAS Dashboard update available: $eas_dashboard_url"
+              echo "::set-output name=url::$eas_dashboard_url"
+          else
+              echo "No EAS Dashboard URL found."
+              exit 1
+          fi
+
+      - name: 📝 Comment on Pull Request
+        run: |
+          if [ -n "${{ steps.eas-update.outputs.url }}" ]; then
+              gh pr comment ${{ github.event.pull_request.number }} --body "EAS Dashboard update available: ${{ steps.eas-update.outputs.url }}"
+          fi
 
       - name: Cache node_modules
         uses: actions/cache@v3
@@ -62,6 +83,12 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+            
+    # - name: Run Tests
+    #   run: npm test
+
+    # - name: Lint Code
+    #   run: npm run lint 
 
   # notify:
   #   runs-on: ubuntu-latest
