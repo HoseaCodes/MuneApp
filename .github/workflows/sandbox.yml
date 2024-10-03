@@ -172,6 +172,17 @@ jobs:
         CURRENT_DATE=$(date -u +"%Y-%m-%d %H:%M:%S")
         echo "::set-output name=current_date::$CURRENT_DATE"
 
+    # Generate the message for PR comment and Slack notification
+    - name: Prepare Message
+      id: prepare-message
+      run: |
+        echo "message=**The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)
+
+        | Name | Status | Preview | Comments | Updated (UTC) |
+        | :--- | :----- | :------ | :------- | :------ |
+        | **Manifest URL** | 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()  | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
+        | **Deep Link** | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |" >> $GITHUB_ENV
+
     # Post QR Code URL as a comment on the pull request (Optional)
     - name: Post QR Code as PR comment
       uses: marocchino/sticky-pull-request-comment@v2
@@ -180,27 +191,23 @@ jobs:
         number: ${{ steps.PR.outputs.number || github.event.number }}
         token: ${{ secrets.GITHUB_TOKEN }}
         header: "EAS Update QR Code"
-        message: |
-          **The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)
-
-          | Name | Status | Preview | Comments | Updated (UTC) |
-          | :--- | :----- | :------ | :------- | :------ |
-          | **Manifest URL** | 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()  | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
-          | **Deep Link** | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
+        message: ${{ env.message }}
 
   slackNotification:
     name: Slack Notification
     runs-on: ubuntu-latest
+    needs: generate-qr-code
     steps:
       - uses: actions/checkout@master
       - name: Slack Notification Demo
         uses: bryannice/gitactions-slack-notification@2.0.0
         env:
-          SLACK_CHANNEL: 'development'
+          SLACK_CHANNEL: 'pull-requests'
           SLACK_INCOMING_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
-          SLACK_MESSAGE: 'Demo''ing the Slack Notification'
-          SLACK_TITLE: 'Slack Notification Demo'
+          SLACK_TITLE: ${{ github.event.pull_request.title }}
+          SLACK_MESSAGE: ${{ env.message }}
           SLACK_USERNAME: 'mun-e-bot'
+
 
   #   - name: Send email notification
   #     uses: dawidd6/action-send-mail@v3
