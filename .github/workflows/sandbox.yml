@@ -34,20 +34,23 @@ jobs:
     - name: Install dependencies
       run: npm install --legacy-peer-deps
 
+    - name: Install EAS CLI
+      run: npm install -g eas-cli
+
     - name: Log in to Expo
       run: npx expo login --username ${{ secrets.EXPO_USERNAME }} --password ${{ secrets.EXPO_PASSWORD }}
 
     - name: Build Expo iOS project
-      run: eas build -p ios
+      run: eas build -p ios --profile release --team ${{ secrets.APPLE_TEAM_ID }}
       env:
         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }} 
         EXPO_ORG: 'mun-e'
 
-    - name: Build Expo Android project
-      run:  eas build -p android
-      env:
-        EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        EXPO_ORG: 'mun-e'
+    # - name: Build Expo Android project
+    #   run: eas build -p android --non-interactive --profile release --team <your-team-id>
+    #   env:
+    #     EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    #     EXPO_ORG: 'mun-e'
 
     # - name: Run Tests
     #   run: npm test
@@ -69,11 +72,11 @@ jobs:
         name: ios-build
         path: ./ios-build
     
-    - name: Upload Android build artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: android-build
-        path: ./android-build
+    # - name: Upload Android build artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: android-build
+    #     path: ./android-build
 
     - name: Deploy to Expo
       run: npx expo publish --owner mun-e
