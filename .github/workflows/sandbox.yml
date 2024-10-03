@@ -230,11 +230,11 @@ jobs:
           SLACK_MESSAGE: ${{ needs.generate-qr-code.outputs.slack_message }}
           SLACK_USERNAME: 'mun-e-bot'
 
-  # linear_webhook:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check Linear Issue Status
-  #       run: echo "Check Linear Status"
+  linear_webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Linear Issue Status
+        run: echo "Check Linear Status"
         # id: check_linear_issue
         # run: |
         #   # Set up Linear API token
