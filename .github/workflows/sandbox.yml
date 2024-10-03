@@ -42,6 +42,14 @@ jobs:
     # needs: unittests
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+
     - name: Check for code changes in src folder
       id: check_changes
       run: |
@@ -55,14 +63,6 @@ jobs:
         fi
 
         echo "Changes detected in src folder. Proceeding..."
-
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
 
     - name: Install Dependencies
       run: npm install --legacy-peer-deps 
