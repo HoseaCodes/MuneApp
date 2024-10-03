@@ -27,6 +27,15 @@ jobs:
       - name: 🏗 Setup repo
         run: |
           echo "Running linter"
+  
+  unittests:
+    needs: linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🏗 Setup repo
+        run: |
+          echo "Running unit tests"
 
   generate-preview-link:
     runs-on: ubuntu-latest
@@ -155,7 +164,7 @@ jobs:
 
   generate-qr-code:
     runs-on: ubuntu-latest
-    needs: linter
+    needs: unittests
     # if: ${{ github.event_name == 'workflow_dispatch' }}
 
     steps:
@@ -215,7 +224,7 @@ jobs:
       id: extract_group_id
       run: |
         # Fetch the JSON output from the eas command
-        json_output=$(npx eas update:list --branch ${{ steps.PR.outputs.number || github.event.number }} --json --non-interactive)
+        json_output=$(npx eas update:list --branch "feature/${{ steps.PR.outputs.number || github.event.number }}" --json --non-interactive)
         
         # Extract the group ID using jq
         group_id=$(echo "$json_output" | jq -r '.currentPage[0].group')
@@ -255,7 +264,7 @@ jobs:
       run: |
         EXPO_SLUG="MuneApp"
         MANIFEST_URL="${{ steps.generate-manifest-url.outputs.manifest_url }}"
-        DEEP_LINK=PREVIEW_LINK
+        DEEP_LINK="$PREVIEW_LINK"
         echo "::set-output name=deep_link::$DEEP_LINK"
 
     # Step 8: Generate QR Code from Deep Link
@@ -282,9 +291,17 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         header: "EAS Update QR Code"
         message: |
-          Manifest URL: ${{ steps.generate-manifest-url.outputs.manifest_url }}
-          Deep Link: ${{ steps.generate-deep-link.outputs.deep_link }}
-          ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }})
+          **The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)
+
+          | Name | Status | Preview | Comments | Updated (UTC) |
+          | :--- | :----- | :------ | :------- | :------ |
+          | **Manifest URL** | 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()  | 💬 [**Add feedback**]() | $CREATED_AT |
+          | **Deep Link** | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | $CREATED_AT |
+
+        # message: |
+        #   Manifest URL: ${{ steps.generate-manifest-url.outputs.manifest_url }}
+        #   Deep Link: ${{ steps.generate-deep-link.outputs.deep_link }}
+        #   ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }})
     # - name: Run Tests
     #   run: npm test
 
