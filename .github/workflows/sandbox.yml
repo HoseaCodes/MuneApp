@@ -83,11 +83,16 @@ jobs:
           
           echo "::set-output name=preview_link::$PREVIEW_LINK"
 
+      - name: Get Pull Request Number
+        uses: 8BitJonny/gh-get-current-pr@3.0.0
+        id: PR
+        
       # Step 8: Post the preview link in the PR comment (optional)
       - name: Post Preview Link to PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.PR.outputs.number || github.event.number }}
           header: "Expo Preview Link"
           message: |
             Here's the preview link: ${{ steps.generate-preview-link.outputs.preview_link }}
