@@ -264,7 +264,8 @@ jobs:
       run: |
         EXPO_SLUG="MuneApp"
         MANIFEST_URL="${{ steps.generate-manifest-url.outputs.manifest_url }}"
-        DEEP_LINK="$PREVIEW_LINK"
+        PREVIEW_LINK="${{ steps.generate-preview-link.outputs.preview_link }}"  
+        DEEP_LINK=$PREVIEW_LINK
         echo "::set-output name=deep_link::$DEEP_LINK"
 
     # Step 8: Generate QR Code from Deep Link
@@ -282,7 +283,14 @@ jobs:
         name: qr-code
         path: ${{ steps.generate-qr-code.outputs.qr_code_url }}
 
-    # Step 10: Post QR Code URL as a comment on the pull request (Optional)
+    - name: Get current date
+      id: get-current-date
+      run: |
+        # Get the current date in UTC format
+        CURRENT_DATE=$(date -u +"%Y-%m-%d %H:%M:%S")
+        echo "::set-output name=current_date::$CURRENT_DATE"
+
+    # Post QR Code URL as a comment on the pull request (Optional)
     - name: Post QR Code as PR comment
       uses: marocchino/sticky-pull-request-comment@v2
       with:
@@ -295,8 +303,8 @@ jobs:
 
           | Name | Status | Preview | Comments | Updated (UTC) |
           | :--- | :----- | :------ | :------- | :------ |
-          | **Manifest URL** | 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()  | 💬 [**Add feedback**]() | $CREATED_AT |
-          | **Deep Link** | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | $CREATED_AT |
+          | **Manifest URL** | 🔗 [View Manifest](${{ steps.generate-manifest-url.outputs.manifest_url }}) | ✅ Ready [Inspect]()  | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
+          | **Deep Link** | 🔗 [Open Deep Link](${{ steps.generate-deep-link.outputs.deep_link }}) | ![QR Code](${{ steps.generate-qr-code.outputs.qr_code_url }}) | 💬 [**Add feedback**]() | ${{ steps.get-current-date.outputs.current_date }} |
 
         # message: |
         #   Manifest URL: ${{ steps.generate-manifest-url.outputs.manifest_url }}
