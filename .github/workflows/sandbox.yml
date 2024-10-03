@@ -40,7 +40,6 @@ jobs:
   generate-qr-code:
     runs-on: ubuntu-latest
     # needs: unittests
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
 
     steps:
     - name: Check for code changes in src folder
