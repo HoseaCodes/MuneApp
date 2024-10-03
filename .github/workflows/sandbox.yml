@@ -30,6 +30,7 @@ jobs:
 
   generate-preview-link:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' }}
 
     steps:
       - name: Checkout code
@@ -181,18 +182,71 @@ jobs:
 
     # Set channel to the branch (this assumes channel name matches branch)
     - name: Set EAS Channel
-      run: eas channel:create "feature/${{ steps.PR.outputs.number || github.event.number }}"
+      run: |
+        CHANNEL_NAME="feature/${{ steps.PR.outputs.number || github.event.number }}"
+        
+        # Check if the channel exists
+        if eas channel:list | grep -q "$CHANNEL_NAME"; then
+          echo "Channel '$CHANNEL_NAME' already exists."
+        else
+          echo "Channel '$CHANNEL_NAME' does not exist. Creating it..."
+          eas channel:create "feature/${{ steps.PR.outputs.number || github.event.number }}"
+        fi
 
     - name: Run EAS Update
       run: |
         eas update --auto --branch "feature/${{ steps.PR.outputs.number || github.event.number }}"
+
+    - name: Capture timestamp
+      id: timestamp
+      run: echo "::set-output name=created_at::$(date -u +'%Y-%m-%dT%H:%M:%S.%3NZ')"
+
+    - name: Get PR title or commit message
+      run: |
+        if [ "${{ github.event_name }}" == "pull_request" ]; then
+          MESSAGE="${{ github.event.pull_request.title }}"
+        else
+          MESSAGE="${{ github.event.head_commit.message }}"
+        fi
+        ENCODED_MESSAGE=$(echo "$MESSAGE" | jq -sRr @uri)
+        echo "::set-output name=message::$ENCODED_MESSAGE"
+    
+    - name: Get updates and extract group ID
+      id: extract_group_id
+      run: |
+        # Fetch the JSON output from the eas command
+        json_output=$(npx eas update:list --branch ${{ steps.PR.outputs.number || github.event.number }} --json --non-interactive)
+        
+        # Extract the group ID using jq
+        group_id=$(echo "$json_output" | jq -r '.currentPage[0].group')
+        
+        # Set the extracted group ID as an output variable
+        echo "group_id=${group_id}" >> $GITHUB_ENV
+      continue-on-error: true
+
+    - name: Generate preview link
+      id: generate-preview-link
+      run: |
+        PROJECT_ID="27339099-a190-412f-b17c-40dfb90ea4c9"
+        SLUG="exp"
+        UPDATE_RUNTIME_VERSION="1.0.0"
+        GROUP_ID="${{ env.group_id }}"
+        # GROUP_ID="0bff5c0f-1211-4c82-8737-84210f351138"
+
+        # Use the values generated from the previous steps
+        MESSAGE="${{ steps.get-pr-title.outputs.message }}"
+        CREATED_AT="${{ steps.timestamp.outputs.created_at }}"
+
+        PREVIEW_LINK="https://expo.dev/preview/update?message=${MESSAGE}&updateRuntimeVersion=${UPDATE_RUNTIME_VERSION}&createdAt=${CREATED_AT}&slug=${SLUG}&projectId=${PROJECT_ID}&group=${GROUP_ID}"
+        
+        echo "::set-output name=preview_link::$PREVIEW_LINK"
 
     # Step 6: Generate Manifest URL
     - name: Generate Manifest URL
       id: generate-manifest-url
       run: |
         EAS_PROJECT_ID="27339099-a190-412f-b17c-40dfb90ea4c9"
-        MANIFEST_URL="https://u.expo.dev/${EAS_PROJECT_ID}?channel-name=${{ github.sha }}"
+        MANIFEST_URL="https://u.expo.dev/${EAS_PROJECT_ID}?channel-name=${CHANNEL_NAME}"
         echo "::set-output name=manifest_url::$MANIFEST_URL"
 
     # Step 7: Generate Deep Link URL
@@ -201,7 +255,7 @@ jobs:
       run: |
         EXPO_SLUG="MuneApp"
         MANIFEST_URL="${{ steps.generate-manifest-url.outputs.manifest_url }}"
-        DEEP_LINK="exp+${EXPO_SLUG}://expo-development-client/?url=${MANIFEST_URL}"
+        DEEP_LINK=PREVIEW_LINK
         echo "::set-output name=deep_link::$DEEP_LINK"
 
     # Step 8: Generate QR Code from Deep Link
