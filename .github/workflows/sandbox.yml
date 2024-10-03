@@ -127,13 +127,17 @@ jobs:
       with:
         name: qr-code
         path: ${{ steps.generate-qr-code.outputs.qr_code_url }}
+    
+    - name: Get Pull Request Number
+      uses: 8BitJonny/gh-get-current-pr@3.0.0
+      id: PR
 
     # Step 10: Post QR Code URL as a comment on the pull request (Optional)
     - name: Post QR Code as PR comment
       uses: marocchino/sticky-pull-request-comment@v2
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        number: ${{ github.event.pull_request.number || 123 }}
+        number: ${{ steps.PR.outputs.number || github.event.number }}
         token: ${{ secrets.GITHUB_TOKEN }}
         header: "EAS Update QR Code"
         message: |
