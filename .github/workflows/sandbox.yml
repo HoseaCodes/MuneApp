@@ -189,12 +189,16 @@ jobs:
     - name: Prepare Message
       id: prepare-message
       run: |
-        echo "message=**The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)
-        | Name            | Status                                              | Preview                                    | Comments                | Updated (UTC)                     |
-        | :-------------- | :--------------------------------------------------| :----------------------------------------- | :--------------------- | :-------------------------------- |
-        | **Manifest URL**| 🔗 [View Manifest](https://u.expo.dev/27339099-a190-412f-b17c-40dfb90ea4c9?channel-name=) | ✅ Ready [Inspect]()                       | 💬 [**Add feedback**]() | 2024-10-03 09:20:10 |
-        | **Deep Link**   | 🔗 [Open Deep Link](https://expo.dev/preview/update?message=&updateRuntimeVersion=1.0.0&createdAt=2024-10-03T09:20:08.650Z&slug=exp&projectId=27339099-a190-412f-b17c-40dfb90ea4c9&group=61ccc202-29ec-4114-a408-b9a715255561) | ![QR Code](https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=https%3A%2F%2Fexpo.dev%2Fpreview%2Fupdate%3Fmessage%3D%26updateRuntimeVersion%3D1.0.0%26createdAt%3D2024-10-03T09%3A20%3A08.650Z%26slug%3Dexp%26projectId%3D27339099-a190-412f-b17c-40dfb90ea4c9%26group%3D61ccc202-29ec-4114-a408-b9a715255561&qzone=1&margin=0&size=500x500&ecc=L) | 💬 [**Add feedback**]() | 2024-10-03 09:20:10 |" >> $GITHUB_ENV
-
+        {
+          echo 'message<<EOF'
+          echo "**The latest updates on your projects**. Learn more about [Expo ↗︎](https://expo.dev/)"
+          echo
+          echo "| Name | Status | Preview | Comments | Updated (UTC) |"
+          echo "| :-------------- | :--------------------------------------------------| :----------------------------------------- | :--------------------- | :-------------------------------- |"
+          echo "| **Manifest URL** | 🔗 [View Manifest](https://u.expo.dev/27339099-a190-412f-b17c-40dfb90ea4c9?channel-name=) | ✅ Ready [Inspect]() | 💬 [**Add feedback**]() | 2024-10-03 09:20:10 |"
+          echo "| **Deep Link** | 🔗 [Open Deep Link](https://expo.dev/preview/update?message=&updateRuntimeVersion=1.0.0&createdAt=2024-10-03T09:20:08.650Z&slug=exp&projectId=27339099-a190-412f-b17c-40dfb90ea4c9&group=61ccc202-29ec-4114-a408-b9a715255561) | ![QR Code](https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=https%3A%2F%2Fexpo.dev%2Fpreview%2Fupdate%3Fmessage%3D%26updateRuntimeVersion%3D1.0.0%26createdAt%3D2024-10-03T09%3A20%3A08.650Z%26slug%3Dexp%26projectId%3D27339099-a190-412f-b17c-40dfb90ea4c9%26group%3D61ccc202-29ec-4114-a408-b9a715255561&qzone=1&margin=0&size=500x500&ecc=L) | 💬 [**Add feedback**]() | 2024-10-03 09:20:10 |"
+          echo 'EOF'
+        } >> $GITHUB_ENV
 
     # Post QR Code URL as a comment on the pull request (Optional)
     - name: Post QR Code as PR comment
