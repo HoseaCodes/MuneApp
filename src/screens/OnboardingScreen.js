@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Dimensions } from "react-native";
+import HeaderProgressBar from '../../components/HeaderProgressBar';
 
 const OnboardingScreen = ({ navigation }) => {
   const { width } = Dimensions.get("window"); // Get screen width for responsive button width
@@ -13,16 +14,20 @@ const OnboardingScreen = ({ navigation }) => {
         backgroundColor: "#ffffff", // Screen background color
       }}
     >
+      {/* Render the header progress bar */}
+      <HeaderProgressBar totalPages={4} currentPage={0} />
+
       <Text
         style={{
-          fontSize: 24, 
+          fontSize: 24,
           fontWeight: "bold",
-          marginBottom: 20, 
-          color: "#333333", 
+          marginBottom: 20,
+          color: "#333333",
         }}
       >
         Welcome to Mun-e!
       </Text>
+
       {/* Replacing Button with TouchableOpacity to apply custom styling */}
       <TouchableOpacity
         style={{
