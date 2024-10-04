@@ -209,6 +209,7 @@ jobs:
       run: |
         {
           echo 'bullet_message<<EOF'
+          echo
           echo "The latest updates on your projects. Learn more about [Expo ↗︎](https://expo.dev/)"
           echo
           echo "• Manifest URL: https://u.expo.dev/27339099-a190-412f-b17c-40dfb90ea4c9?channel-name="
