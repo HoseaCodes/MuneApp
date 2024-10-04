@@ -211,9 +211,9 @@ jobs:
           echo 'bullet_message<<EOF'
           echo "The latest updates on your projects. Learn more about [Expo ↗︎](https://expo.dev/)"
           echo
-          echo "- Manifest URL https://u.expo.dev/27339099-a190-412f-b17c-40dfb90ea4c9?channel-name="
-          echo "- Deep Link https://expo.dev/preview/update?message=&updateRuntimeVersion=1.0.0&createdAt=2024-10-03T09:20:08.650Z&slug=exp&projectId=27339099-a190-412f-b17c-40dfb90ea4c9&group=61ccc202-29ec-4114-a408-b9a715255561"
-          echo "- QR Code https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=https%3A%2F%2Fexpo.dev%2Fpreview%2Fupdate%3Fmessage%3D%26updateRuntimeVersion%3D1.0.0%26createdAt%3D2024-10-03T09%3A20%3A08.650Z%26slug%3Dexp%26projectId%3D27339099-a190-412f-b17c-40dfb90ea4c9%26group%3D61ccc202-29ec-4114-a408-b9a715255561&qzone=1&margin=0&size=500x500&ecc=L"
+          echo "• Manifest URL: https://u.expo.dev/27339099-a190-412f-b17c-40dfb90ea4c9?channel-name="
+          echo
+          echo "• Deep Link: https://expo.dev/preview/update?message=&updateRuntimeVersion=1.0.0&createdAt=2024-10-03T09:20:08.650Z&slug=exp&projectId=27339099-a190-412f-b17c-40dfb90ea4c9&group=61ccc202-29ec-4114-a408-b9a715255561"
           echo 'EOF'
         } >> $GITHUB_ENV
   
