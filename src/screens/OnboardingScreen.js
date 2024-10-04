@@ -14,6 +14,7 @@ const OnboardingScreen = ({ navigation }) => {
         backgroundColor: "#ffffff", // Screen background color
       }}
     >
+
       {/* Render the header progress bar */}
       <HeaderProgressBar totalPages={4} currentPage={0} />
 
