@@ -35,6 +35,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "transformer": {
+      "babelTransformerPath": "react-native-svg-transformer"
+    },
+    "resolver": {
+      "sourceExts": ["js", "json", "ts", "tsx", "jsx", "svg"]
     }
   }
 }
