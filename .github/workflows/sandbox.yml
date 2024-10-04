@@ -253,7 +253,7 @@ jobs:
           SLACK_CHANNEL: 'pull-requests'
           SLACK_INCOMING_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
           SLACK_TITLE: ${{ github.event.pull_request.title || github.event.head_commit.message }}
-          SLACK_MESSAGE: ${{ steps.read_file.outputs.file_content || needs.generate-qr-code.outputs.slack_message }}
+          SLACK_MESSAGE: ${{ steps.read_file.outputs.file_content }}
           SLACK_USERNAME: 'mun-e-bot'
 
   linear_webhook:
