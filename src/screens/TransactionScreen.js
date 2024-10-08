@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
-import CreditCard from "../../components/CreditCard";
-import Line from "../../components/Line";
+import CreditCard from "../components/CreditCard";
+import Line from "../components/Line";
 import Feather from '@expo/vector-icons/Feather';
-import LatestTransactions from "../../components/transactions/LatestTransactions";
+import LatestTransactions from "../components/transactions/LatestTransactions";
 
 const TransactionScreen = () => {
   const [showBalance, setShowBalance] = React.useState(false);

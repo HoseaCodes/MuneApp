@@ -1,10 +1,10 @@
 import React from 'react'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { View, Text, SafeAreaView, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import DetailsModal from '../../components/transactions/DetailsModal';
+import DetailsModal from '../components/transactions/DetailsModal';
 import { BlurView } from 'expo-blur';
-import Header from '../../components/Header';
-import { usertransactions, userpurchases, userdetails } from '../../constants/TestData';
+import Header from '../components/Header';
+import { usertransactions, userpurchases, userdetails } from '../constants/TestData';
 
 export default function TransactionDetailScreen() {
     const [isModalVisible, setModalVisible] = React.useState(false);
