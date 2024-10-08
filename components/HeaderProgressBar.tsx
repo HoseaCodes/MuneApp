@@ -1,12 +1,5 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Dimensions, Image } from "react-native";
-import MLogo from '../assets/images/Mlogo.png';
-import ULogo from '../assets/images/Ulogo.png';
-import NLogo from '../assets/images/Nlogo.png';
-import ELogo from '../assets/images/Elogo.png';
-import LChainLogo from '../assets/images/Lchain_logo.png';
-import RChainLogo from '../assets/images/Rchain_logo.png';
-
 interface HeaderProgressBarProps {
   totalPages: number;
   currentPage: number;
@@ -27,12 +20,8 @@ const HeaderProgressBar = ({ totalPages, currentPage }: HeaderProgressBarProps):
         }}
       >
         {/* Each logo with responsive size */}
-        <Image source={MLogo} style={{ width: 32, height: 25, marginHorizontal: 5 }} />
-        <Image source={ULogo} style={{ width: 32, height: 25, marginHorizontal: 5 }} />
-        <Image source={NLogo} style={{ width: 32, height: 25, marginHorizontal: 5 }} />
-        <Image source={LChainLogo} style={{ width: 32, height: 25, marginHorizontal: 5 }} />
-        <Image source={RChainLogo} style={{ width: 32, height: 25, marginHorizontal: 5 }} />
-        <Image source={ELogo} style={{ width: 32, height: 25, marginHorizontal: 5}} />
+        {/* <Image source={Mune_Logo} style={{ width: 132, height: 20, position: 'absolute', top: 10, left: 10 }} /> */}
+      
       </View>
       {/* Progress Bar */}
       <View

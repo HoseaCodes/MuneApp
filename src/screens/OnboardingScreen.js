@@ -53,6 +53,32 @@ const OnboardingScreen = ({ navigation }) => {
         >
           Sign Up
         </Text>
+        
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#FFFFFF",
+          width: width * 0.78, // Responsive width based on screen width
+          height: 56,
+          borderRadius: 14,
+          justifyContent: "center", // Center text vertically
+          alignItems: "center", // Center text horizontally
+        }}
+        onPress={() => navigation.navigate("Register")}
+      >
+        <Text
+          style={{
+            fontFamily: "Poppins", 
+            fontSize: 16, 
+            fontWeight: "700", 
+            lineHeight: 24,
+            color: "#19A530",
+            textAlign: "center",
+          }}
+        >
+          Log in
+        </Text>
+        
       </TouchableOpacity>
     </View>
   );
