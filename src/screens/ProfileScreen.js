@@ -4,8 +4,8 @@ import UserProfile from "../components/profile/UserProfile";
 import MemberProfile from "../components/profile/MemberProfile";
 
 const ProfileScreen = () => {
-  const type = "member";
-  // const type = "profile";
+  // const type = "member";
+  const type = "profile";
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
