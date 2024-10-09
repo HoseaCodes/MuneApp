@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 import Header from "../Header";
 import Feather from '@expo/vector-icons/Feather';
 import PaymentBar from "../PaymentBar";
+import QRCodeModal from "./QRCodeModal";
 
 const UserProfile = () => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
   return (
+    <>
+    {modalVisible && <QRCodeModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>}
     <View style={styles.container}>
       <View style={styles.header}>
         <Header
@@ -15,9 +20,9 @@ const UserProfile = () => {
       </View>
       <View style={styles.profileImage}>
         <Image source={require('../../../assets/images/profile.png')} style={styles.imageContainer} />
-        <View style={styles.qrContainer}>
+        <TouchableOpacity style={styles.qrContainer} onPress={() => setModalVisible(true)}>
           <Image source={require('../../../assets/images/qrcode.png')} style={styles.qrcode} />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.userInfoContainer}>
         <View>
@@ -47,6 +52,7 @@ const UserProfile = () => {
         <Text style={styles.buttonText}>Invite friends, get $5</Text>
       </TouchableOpacity>
     </View>
+    </>
   );
 };
 
