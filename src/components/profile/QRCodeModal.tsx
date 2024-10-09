@@ -28,18 +28,27 @@ const QRCodeModal: React.FC<{
             title="Mun-e ID"
             IconType={AntDesign}
             iconLeft="left"
+            iconLeftClickHandler={() => setModalVisible(false)}
             iconRight="upload"
           />
           <Image
             source={require("../../../assets/images/qrcode-placeholder.png")}
             style={styles.imageContainer}
           />
+          <View style={styles.codeButtonContainer}>
           <TouchableOpacity
-            onPress={() => setModalVisible(false)}
-            style={styles.hideButton}
+            onPress={() => {}}
+            style={styles.codeButton}
           >
-            <Text style={styles.hideButtonText}>Hide Modal</Text>
+            <Text style={styles.codeButtonText}>My Code</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={styles.codeButton}
+          >
+            <Text style={styles.codeButtonText}>Scan Code</Text>
+          </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </View>
@@ -57,7 +66,7 @@ const styles = StyleSheet.create({
   modalView: {
     display: "flex",
     flexDirection: "column",
-    gap: 50,
+    gap: 60,
     marginTop: "auto",
     backgroundColor: "white",
     padding: 20,
@@ -81,8 +90,32 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 5, height: 5 },
     elevation: 10,
   },
-  hideButton: {},
-  hideButtonText: {},
+  codeButtonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    padding: 10,
+    backgroundColor: "#94989524",
+    borderRadius: 10,
+  },
+  codeButton: {
+    backgroundColor: "white",
+    paddingVertical: 10,
+    paddingHorizontal: 20, 
+    borderRadius: 10,
+    shadowColor: '#00000005', // Color of the shadow
+    shadowOffset: {
+      width: 0,
+      height: 1, // Vertical offset
+    },
+    shadowOpacity: 1, // Opacity of the shadow
+    shadowRadius: 1, // Blur radius
+    elevation: 1, // Android elevation
+  },
+  codeButtonText: {
+    fontWeight: "bold",
+  },
 });
 
 export default QRCodeModal;
