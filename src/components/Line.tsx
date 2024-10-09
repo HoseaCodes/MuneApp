@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         height: 50, 
         transform: [{ rotate: '90deg' }],
         borderLeftWidth: 3, 
-        borderColor: '#D9D9D9', 
+        borderColor: '#B0B3B1', 
     },
 });
 

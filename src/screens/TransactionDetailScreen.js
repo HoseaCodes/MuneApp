@@ -6,7 +6,7 @@ import { BlurView } from 'expo-blur';
 import Header from '../components/Header';
 import { usertransactions, userpurchases, userdetails } from '../constants/TestData';
 
-export default function TransactionDetailScreen() {
+export default function TransactionDetailScreen({ navigation}) {
     const [isModalVisible, setModalVisible] = React.useState(false);
 
     const toggleModal = () => {
@@ -22,7 +22,7 @@ export default function TransactionDetailScreen() {
             )}
             <Header
                 title="Transaction Details"
-                IconType={AntDesign}
+                IconType={AntDesign} navigation={navigation}
                 iconLeft='left' iconRight='questioncircleo' />
             <View style={type === 'purchases' ? styles.userPurchaseContainer: styles.userContainer}>
                 <Image
