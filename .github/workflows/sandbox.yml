@@ -138,7 +138,8 @@ jobs:
         MESSAGE="${{ steps.get-pr-title.outputs.message }}"
         CREATED_AT="${{ steps.timestamp.outputs.created_at }}"
 
-        PREVIEW_LINK="https://expo.dev/preview/update?message=${MESSAGE}&updateRuntimeVersion=${UPDATE_RUNTIME_VERSION}&createdAt=${CREATED_AT}&slug=${SLUG}&projectId=${PROJECT_ID}&group=${GROUP_ID}"        
+        PREVIEW_LINK="https://expo.dev/preview/update?message=${MESSAGE}&updateRuntimeVersion=${UPDATE_RUNTIME_VERSION}&createdAt=${CREATED_AT}&slug=${SLUG}&projectId=${PROJECT_ID}&group=${GROUP_ID}"
+        
         echo "::set-output name=preview_link::$PREVIEW_LINK"
 
     # Generate Manifest URL
