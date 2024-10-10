@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Header from "../Header";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import QRCode from "./QRCode";
 
 const QRCodeModal: React.FC<{
   modalVisible: boolean;
@@ -31,10 +32,7 @@ const QRCodeModal: React.FC<{
             iconLeftClickHandler={() => setModalVisible(false)}
             iconRight="upload"
           />
-          <Image
-            source={require("../../../assets/images/qrcode-placeholder.png")}
-            style={styles.imageContainer}
-          />
+          <QRCode/>
           <View style={styles.codeButtonContainer}>
           <TouchableOpacity
             onPress={() => {}}
