@@ -1,66 +1,51 @@
 import React from "react";
-import { StyleSheet, Image, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 import Header from "../Header";
 import Feather from '@expo/vector-icons/Feather';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import PaymentBar from "../PaymentBar";
-import History from "./History";
 
-const MemberProfile = () => {
+const UserProfile = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Header
-          title="Profile"
-          IconType={AntDesign}
-          iconLeft='left' iconRight='questioncircleo' />
+          title="My Profile"
+          IconType={Feather}
+          iconLeft='chevron-left' iconRight='edit' />
       </View>
       <View style={styles.profileImage}>
-        <Image source={require('../../assets/images/member.png')} style={styles.imageContainer} />
-        <View style={styles.chainContainer}>
-          <Image source={require('../../assets/images/chain2.png')} style={styles.chain} />
+        <Image source={require('../../../assets/images/profile.png')} style={styles.imageContainer} />
+        <View style={styles.qrContainer}>
+          <Image source={require('../../../assets/images/qrcode.png')} style={styles.qrcode} />
         </View>
       </View>
       <View style={styles.userInfoContainer}>
         <View>
-          <Text style={styles.userName}>Ashley B</Text>
-          <Text style={styles.muneName}>@MsAshleyy</Text>
+          <Text style={styles.userName}>John T</Text>
+          <Text style={styles.muneName}>@JohnnyBoy</Text>
         </View>
         <View style={styles.joinedDateContainer}>
-          <Feather style={{paddingRight: 4}} name="calendar" size={14} color="#949895" />
+          <Feather style={{paddingRight: 4}} name="calendar" size={14} color="black" />
           <Text style={styles.joinedDate}>
             Joined Jan 2024
           </Text>
         </View>
       </View>
       <View style={styles.paymentContainer}>
-        <View style={styles.paymentText}>
-          <Text style={styles.paymentTitle}>Your History</Text>
-          <Text style={styles.paymentSubtitle}>View all</Text>
-        </View>
-      </View>
-      <View style={styles.paymentContainer}>
-        <History />
-      </View>
-      <View style={styles.paymentContainer}>
         <View style={styles.paymentInfo}>
-          <Text style={styles.paymentInfoText}>$2,122</Text>
-          <Text style={styles.paymentInfoText}>$2,130</Text>
+          <Text style={styles.paymentInfoText}>220</Text>
+          <Text style={styles.paymentInfoText}>411</Text>
         </View>
         <PaymentBar progress={75} />
         <View style={styles.paymentTypes}>
-          <Text style={styles.paymentTypesText}>Received</Text>
-          <Text style={styles.paymentTypesText}>Sent</Text>
+          <Text style={styles.paymentTypesText}>Invites Accepted</Text>
+          <Text style={styles.paymentTypesText}>Invites Sent</Text>
         </View>
       </View>
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Request</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Pay</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Feather name="plus-circle" size={24} color="white" />
+        <Text style={styles.buttonText}>Invite friends, get $5</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -79,6 +64,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: 345,
     height: 345,
+    marginVertical: -40,
     borderRadius: 34,
     borderColor: '#CEE0D0',
     borderWidth: 2,
@@ -90,10 +76,10 @@ const styles = StyleSheet.create({
   },
   profileImage: {
   },
-  chainContainer: {
+  qrContainer: {
     position: 'absolute',
-    bottom: 15,
-    right: 15,
+    bottom: 20,
+    right: 20,
     width: 44,
     height: 44,
     borderRadius: 14,
@@ -104,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  chain: {
+  qrcode: {
     width: 29,
     height: 29,
   },
@@ -148,38 +134,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 325,
-    paddingVertical: 5,
+    marginBottom: -10,
   },
-  paymentText: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: 315,
-    paddingBottom: 5,
-  },
-  paymentTitle: {
-    fontSize: 20,
-    lineHeight: 30,
-    fontFamily: 'Poppins',
-    color: '#1D251F',
-    fontWeight: '700',
-  },
-  paymentSubtitle: {
-    fontSize: 14,
-    lineHeight: 21,
-    fontFamily: 'Poppins',
-    color: '#19A530',
-    fontWeight: '700',
-  },
-
   paymentInfo: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 315,
-    paddingTop: 15,
+    paddingBottom: 5,
   },
   paymentInfoText: {
     fontSize: 20,
@@ -202,22 +165,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     color: '#3B423D',
   },
-  buttonGroup: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: 355,
-    marginBottom: 20,
-    paddingTop: 20,
-    gap: 20,
-  },
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 164,
+    width: 325,
     height: 56,
     borderRadius: 14,
     backgroundColor: '#19A530',
@@ -232,4 +185,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default MemberProfile;
+export default UserProfile;

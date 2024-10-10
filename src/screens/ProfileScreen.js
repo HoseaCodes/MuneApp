@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Image, SafeAreaView, View, Text, ScrollView } from "react-native";
-import UserProfile from "../../components/profile/UserProfile";
-import MemberProfile from "../../components/profile/MemberProfile";
+import UserProfile from "../components/profile/UserProfile";
+import MemberProfile from "../components/profile/MemberProfile";
 
 const ProfileScreen = () => {
   const type = "member";

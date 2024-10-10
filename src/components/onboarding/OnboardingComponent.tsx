@@ -7,19 +7,19 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
     const [activeSection, setActiveSection] = useState(0);
     const cards = [
         {
-            src: require('../../assets/videos/black-man-paying-with-credit-card-and-cell-phone-s-2023-11-27-05-33-05-utc.mp4'),
+            src: require('../../../assets/videos/black-man-paying-with-credit-card-and-cell-phone-s-2023-11-27-05-33-05-utc.mp4'),
             isVideo: true,
         }, 
         {
-            src: require('../../assets/images/iPhone 14 Pro.png'),
+            src: require('../../../assets/images/iPhone 14 Pro.png'),
             isVideo: false,
         },
         {
-            src: require('../../assets/videos/mun-eprototypevideo desktop.mp4'),
+            src: require('../../../assets/videos/mun-eprototypevideo desktop.mp4'),
             isVideo: true,
         },
         {
-            src: require('../../assets/images/Mockup.png'),
+            src: require('../../../assets/images/Mockup.png'),
             isVideo: false,
         }
     ]

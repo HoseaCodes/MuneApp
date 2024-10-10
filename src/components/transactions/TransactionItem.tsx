@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { getDaysAgo } from '@/utils/helperFunctions';
+import { getDaysAgo } from '../../utils/helperFunctions';
 
-const UserCard = ({ avatarUrl, firstName, lastName, purchaseDate, amount, made_payment, nudged }: { 
+const TransactionItem = ({ avatarUrl, firstName, lastName, purchaseDate, amount, made_payment, nudged }: { 
     avatarUrl: string; 
     firstName: string; 
     lastName: string; 
@@ -15,9 +15,9 @@ const UserCard = ({ avatarUrl, firstName, lastName, purchaseDate, amount, made_p
     const daysAgo = getDaysAgo(purchaseDate);
     const formattedDate = nudge ? 'Requested' : daysAgo < 50 ? `Requested ${daysAgo} days ago` : purchaseDate
     return (
-        <View style={styles.cardContainer}>
+        <TouchableOpacity style={styles.cardContainer} accessible={true} accessibilityLabel={`${firstName} ${lastName}`}>
             <View style={styles.avatarContainer}>
-                <Image source={avatarUrl ? avatarUrl : require('../../assets/images/noImage.png')} style={styles.avatar} />
+                <Image source={avatarUrl ? avatarUrl : require('../../../assets/images/noImage.png')} style={styles.avatar} />
             </View>
             <View style={styles.userInfo}>
               <Text style={styles.userName}>{firstName} {lastName}</Text>
@@ -32,7 +32,7 @@ const UserCard = ({ avatarUrl, firstName, lastName, purchaseDate, amount, made_p
                 nudge ? <Text style={styles.nudged}>👉 Nudged</Text> : null
               }
             <Text style={styles.amount}>{amount}</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserCard;
+export default TransactionItem;
