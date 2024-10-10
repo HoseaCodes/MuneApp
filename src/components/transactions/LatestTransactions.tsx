@@ -2,7 +2,7 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import React from 'react'
 import { latestTrans } from '../../constants/TestData'
 import { formatDate } from '../../utils/helperFunctions'
-import UserCard from './UserCard'
+import TransactionItem from './TransactionItem'
 
 export default function LatestTransactions() {
     const sortedTransactions = latestTrans.sort((a, b) => {
@@ -13,7 +13,7 @@ export default function LatestTransactions() {
         <Text style={styles.title}>Latest Transactions</Text>
         <ScrollView contentContainerStyle={styles.container}>
             {sortedTransactions.map((user, index) => (
-                <UserCard
+                <TransactionItem
                     key={index}
                     avatarUrl={user.user_image}
                     firstName={user.first_name}
