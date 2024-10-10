@@ -38,19 +38,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
   },
-  logoContainer: {
-    position: "absolute",
-    width: 50,
-    height: 50,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logo: {
-    width: "90%",
-    height: "90%",
-    borderRadius: 12.5,
-  },
 });
 
 export default QRCode;
