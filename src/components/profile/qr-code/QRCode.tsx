@@ -7,7 +7,6 @@ const QRCode: React.FC = () => (
     <QRCodeStyled
       data={`https://www.mun-e.com/profile/johnny-boy`}
       style={styles.svg}
-      padding={20}
       pieceSize={8}
       pieceBorderRadius={4}
       color={"#19A530"}
@@ -20,7 +19,7 @@ const QRCode: React.FC = () => (
         color: "#19A530",
       }}
       logo={{
-        href: require("../../../assets/images/profile.png"),
+        href: require("../../../../assets/images/profile.png"),
         padding: 6,
         scale: 1.1,
       }}
@@ -30,8 +29,14 @@ const QRCode: React.FC = () => (
 
 const styles = StyleSheet.create({
   root: {
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    borderStyle: "dashed",
+    borderWidth: 1,
+    borderColor: "#CEE0D0",
+    borderRadius:32.35,
+    padding: 29.45,
   },
   svg: {
     backgroundColor: "#fff",

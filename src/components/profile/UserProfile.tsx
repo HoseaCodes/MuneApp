@@ -3,7 +3,7 @@ import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 import Header from "../Header";
 import Feather from '@expo/vector-icons/Feather';
 import PaymentBar from "../PaymentBar";
-import QRCodeModal from "./QRCodeModal";
+import QRCodeModal from "./qr-code/QRCodeModal";
 
 const UserProfile = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
