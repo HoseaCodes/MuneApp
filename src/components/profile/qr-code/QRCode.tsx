@@ -2,14 +2,14 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import QRCodeStyled from "react-native-qrcode-styled";
 
-const QRCode: React.FC = () => (
+const QRCode: React.FC<{ userId: number }> = ({ userId }) => (
   <View style={styles.root}>
     <QRCodeStyled
-      data={`https://www.mun-e.com/profile/johnny-boy`}
+      data="https://www.placeholder.com"
       style={styles.svg}
       pieceSize={8}
       pieceBorderRadius={4}
-      color={"#19A530"}
+      color="#19A530"
       innerEyesOptions={{
         borderRadius: 4.76,
         color: "#19A530",
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderStyle: "dashed",
     borderWidth: 1,
     borderColor: "#CEE0D0",
-    borderRadius:32.35,
+    borderRadius: 32.35,
     padding: 29.45,
   },
   svg: {

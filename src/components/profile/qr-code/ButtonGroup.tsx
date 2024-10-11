@@ -11,7 +11,8 @@ const ButtonGroup: React.FC<{ initialActiveButton?: boolean }> = ({
   initialActiveButton,
 }) => {
   const [isMyCodeActive, setIsMyCodeActive] = useState(initialActiveButton);
-  const slideAnim = useRef(
+  
+  const slideAnime = useRef(
     new Animated.Value(initialActiveButton ? 0 : 1),
   ).current;
 
@@ -20,19 +21,19 @@ const ButtonGroup: React.FC<{ initialActiveButton?: boolean }> = ({
   };
 
   const animatedBackgroundStyle = {
-    left: slideAnim.interpolate({
+    left: slideAnime.interpolate({
       inputRange: [0, 1],
-      outputRange: ["2%", "50%"],
+      outputRange: ["4%", "53%"],
     }),
   };
 
   useEffect(() => {
-    Animated.timing(slideAnim, {
+    Animated.timing(slideAnime, {
       toValue: isMyCodeActive ? 0 : 1,
       duration: 300,
       useNativeDriver: false,
     }).start();
-  }, [isMyCodeActive, slideAnim]);
+  }, [isMyCodeActive, slideAnime]);
 
   return (
     <View style={styles.container}>

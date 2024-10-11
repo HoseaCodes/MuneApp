@@ -5,9 +5,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import QRCodeAndButtons from "./QRCodeAndButtons";
 
 const QRCodeModal: React.FC<{
+  userId: number;
   modalVisible: boolean;
   setModalVisible: Dispatch<SetStateAction<boolean>>;
-}> = ({ modalVisible, setModalVisible }) => {
+}> = ({ userId, modalVisible, setModalVisible }) => {
   return (
     <View style={styles.container}>
       <Modal
@@ -24,7 +25,7 @@ const QRCodeModal: React.FC<{
             iconLeftClickHandler={() => setModalVisible(false)}
             iconRight="upload"
           />
-          <QRCodeAndButtons />
+          <QRCodeAndButtons userId={userId} />
         </View>
       </Modal>
     </View>
