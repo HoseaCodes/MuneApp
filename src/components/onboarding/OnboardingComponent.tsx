@@ -11,7 +11,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             isVideo: true,
         }, 
         {
-            src: require('../../../assets/images/iPhone 14 Pro.png'),
+            src: require('../../../assets/images/mockup2.png'),
             isVideo: false,
         },
         {

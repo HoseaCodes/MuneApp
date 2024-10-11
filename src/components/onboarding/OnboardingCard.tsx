@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet } from 'react-native';
 import { ResizeMode, Video } from 'expo-av'; 
+import { LinearGradient } from 'expo-linear-gradient';
+import CreditCard from '../CreditCard';
+
 
 const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, isVideo: boolean }) => {
   return (
@@ -8,7 +11,7 @@ const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, 
       <ImageBackground
         source={isVideo ? null : backgroundSource} 
         style={styles.background}
-        resizeMode="cover"
+        resizeMode="contain"
       >
         {isVideo && (
           <Video
@@ -20,11 +23,28 @@ const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, 
             isLooping={true}
           />
         )}
+        {
+          !isVideo && (
+            <>
+              <LinearGradient
+                colors={[
+                  'rgba(245, 245, 245, 0.5)', 
+                  '#f5f5f5'
+                ]}
+                style={styles.fadeEffect}
+              />
+              <LinearGradient colors={['rgba(245, 245, 245, 0.75)', 'rgba(245, 245, 245, 0.95)', '#f5f5f5']} style={styles.fadeEffect2} />
+              <View style={styles.creditcard}>
+                <CreditCard />
+              </View>
+            </>
+          )
+        }
         <View style={styles.overlay1} />
         <View style={styles.blurEffect} />
         <View style={styles.textContainer}>
-          <Text style={styles.title}>Elevate Your Financial IQ.</Text>
-          <Text style={styles.subtitle}>Stay ahead in your financial journey</Text>
+          <Text style={[styles.title, { color: isVideo ? "white" : "#3B423D" }]}>Elevate Your Financial IQ.</Text>
+          <Text style={[styles.subtitle, { color: isVideo ? "white" : "#3B423D" }]}>Stay ahead in your financial journey</Text>
         </View>
       </ImageBackground>
     </View>
@@ -64,9 +84,31 @@ const styles = StyleSheet.create({
     height: 550,
     backgroundColor: '#00E18705',
   },
+  fadeEffect: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  fadeEffect2: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: 250,
+  },
+  creditcard: {
+    position: 'absolute',
+    top: 25,
+    left: 10,
+    width: 345,
+    height: 549,
+    transform: [{ scale: 0.8 },{ rotate: '-5deg' }],
+  },
   textContainer: {
     position: 'absolute',
-    top: 462,
+    top: 362,
     left: 16,
     width: 314,
     height: 86, 
