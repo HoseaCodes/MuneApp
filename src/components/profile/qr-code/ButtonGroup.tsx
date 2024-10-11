@@ -8,16 +8,17 @@ import {
 } from "react-native";
 
 const ButtonGroup: React.FC<{ initialActiveButton?: boolean }> = ({
-  initialActiveButton,
+  initialActiveButton = true,
 }) => {
-  const [isMyCodeActive, setIsMyCodeActive] = useState(initialActiveButton);
-  
+  const [isMyCodeButtonActive, setIsMyCodeButtonActive] =
+    useState(initialActiveButton);
+
   const slideAnime = useRef(
     new Animated.Value(initialActiveButton ? 0 : 1),
   ).current;
 
   const toggleActive = (isMyCode: boolean) => {
-    setIsMyCodeActive(isMyCode);
+    setIsMyCodeButtonActive(isMyCode);
   };
 
   const animatedBackgroundStyle = {
@@ -29,17 +30,15 @@ const ButtonGroup: React.FC<{ initialActiveButton?: boolean }> = ({
 
   useEffect(() => {
     Animated.timing(slideAnime, {
-      toValue: isMyCodeActive ? 0 : 1,
+      toValue: isMyCodeButtonActive ? 0 : 1,
       duration: 300,
       useNativeDriver: false,
     }).start();
-  }, [isMyCodeActive, slideAnime]);
+  }, [isMyCodeButtonActive, slideAnime]);
 
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[styles.activeBackground, animatedBackgroundStyle]}
-      />
+      <Animated.View style={[styles.activeButton, animatedBackgroundStyle]} />
       <TouchableOpacity
         style={[styles.button, styles.leftButton]}
         onPress={() => toggleActive(true)}
@@ -48,7 +47,7 @@ const ButtonGroup: React.FC<{ initialActiveButton?: boolean }> = ({
         <Text
           style={[
             styles.buttonText,
-            isMyCodeActive ? styles.activeText : styles.inactiveTextLeft,
+            isMyCodeButtonActive ? styles.activeText : styles.inactiveTextRight,
           ]}
         >
           My Code
@@ -62,7 +61,9 @@ const ButtonGroup: React.FC<{ initialActiveButton?: boolean }> = ({
         <Text
           style={[
             styles.buttonText,
-            !isMyCodeActive ? styles.activeText : styles.inactiveTextRight,
+            !isMyCodeButtonActive
+              ? styles.activeText
+              : styles.inactiveTextRight,
           ]}
         >
           Scan Code
@@ -79,10 +80,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     padding: 10,
-    backgroundColor: "#94989524",
+    backgroundColor: "rgba(148, 152, 149, 0.14)",
     borderRadius: 10,
   },
-  activeBackground: {
+  activeButton: {
     position: "absolute",
     width: "50%",
     height: "100%",
