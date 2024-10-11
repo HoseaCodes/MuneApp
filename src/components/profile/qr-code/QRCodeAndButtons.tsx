@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import QRCode from "./QRCode";
+import ButtonGroup from "./ButtonGroup";
 
 const QRCodeAndButtons: React.FC = () => (
   <View style={styles.container}>
     <View style={styles.QRCodeAndButtonsContainer}>
       <QRCode />
-      <View style={styles.codeButtonContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.codeButton}>
-          <Text style={styles.codeButtonText}>My Code</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.codeButton}>
-          <Text style={styles.codeButtonText}>Scan Code</Text>
-        </TouchableOpacity>
-      </View>
+      <ButtonGroup />
     </View>
   </View>
 );
