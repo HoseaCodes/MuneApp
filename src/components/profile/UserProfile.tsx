@@ -1,132 +1,72 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  StyleSheet,
-  Image,
-  View,
-  Text,
-  TouchableOpacity,
-  Animated,
-} from "react-native";
+import React, { Dispatch, SetStateAction } from "react";
+import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 import Header from "../Header";
 import Feather from "@expo/vector-icons/Feather";
 import PaymentBar from "../PaymentBar";
-import QRCodeModal from "./qr-code/QRCodeModal";
-import { BlurView } from "expo-blur";
 
-const UserProfile = () => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-
-  const fadeAnime = useRef(new Animated.Value(0)).current; // Initial opacity value set to 0
-
-  useEffect(() => {
-    if (modalVisible) {
-      Animated.timing(fadeAnime, {
-        toValue: 1, // Fade in to opacity 1
-        duration: 250, // Duration of the fade in animation
-        useNativeDriver: true, // Use native driver for performance
-      }).start();
-    } else {
-      Animated.timing(fadeAnime, {
-        toValue: 0, // Fade out to opacity 0
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [modalVisible]);
-
+const UserProfile: React.FC<{
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
+}> = ({ setModalVisible }) => {
   return (
-    <>
-      {modalVisible && (
-        <QRCodeModal
-          userId={1}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Header
+          title="My Profile"
+          IconType={Feather}
+          iconLeft="chevron-left"
+          iconRight="edit"
         />
-      )}
-      {/* {modalVisible && ( */}
-        <Animated.View style={[styles.animeContainer, { opacity: fadeAnime }]} pointerEvents="none">
-          <BlurView intensity={50} style={styles.blurBackground}/>
-        </Animated.View>
-      {/* )} */}
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Header
-            title="My Profile"
-            IconType={Feather}
-            iconLeft="chevron-left"
-            iconRight="edit"
-          />
-        </View>
-        <View style={styles.profileImage}>
+      </View>
+      <View style={styles.profileImage}>
+        <Image
+          source={require("../../../assets/images/profile.png")}
+          style={styles.imageContainer}
+        />
+        <TouchableOpacity
+          style={styles.qrContainer}
+          onPress={() => setModalVisible(true)}
+        >
           <Image
-            source={require("../../../assets/images/profile.png")}
-            style={styles.imageContainer}
+            source={require("../../../assets/images/qrcode.png")}
+            style={styles.qrcode}
           />
-          <TouchableOpacity
-            style={styles.qrContainer}
-            onPress={() => setModalVisible(true)}
-          >
-            <Image
-              source={require("../../../assets/images/qrcode.png")}
-              style={styles.qrcode}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.userInfoContainer}>
-          <View>
-            <Text style={styles.userName}>John T</Text>
-            <Text style={styles.muneName}>@JohnnyBoy</Text>
-          </View>
-          <View style={styles.joinedDateContainer}>
-            <Feather
-              style={{ paddingRight: 4 }}
-              name="calendar"
-              size={14}
-              color="black"
-            />
-            <Text style={styles.joinedDate}>Joined Jan 2024</Text>
-          </View>
-        </View>
-        <View style={styles.paymentContainer}>
-          <View style={styles.paymentInfo}>
-            <Text style={styles.paymentInfoText}>220</Text>
-            <Text style={styles.paymentInfoText}>411</Text>
-          </View>
-          <PaymentBar progress={75} />
-          <View style={styles.paymentTypes}>
-            <Text style={styles.paymentTypesText}>Invites Accepted</Text>
-            <Text style={styles.paymentTypesText}>Invites Sent</Text>
-          </View>
-        </View>
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Feather name="plus-circle" size={24} color="white" />
-          <Text style={styles.buttonText}>Invite friends, get $5</Text>
         </TouchableOpacity>
       </View>
-    </>
+      <View style={styles.userInfoContainer}>
+        <View>
+          <Text style={styles.userName}>John T</Text>
+          <Text style={styles.muneName}>@JohnnyBoy</Text>
+        </View>
+        <View style={styles.joinedDateContainer}>
+          <Feather
+            style={{ paddingRight: 4 }}
+            name="calendar"
+            size={14}
+            color="black"
+          />
+          <Text style={styles.joinedDate}>Joined Jan 2024</Text>
+        </View>
+      </View>
+      <View style={styles.paymentContainer}>
+        <View style={styles.paymentInfo}>
+          <Text style={styles.paymentInfoText}>220</Text>
+          <Text style={styles.paymentInfoText}>411</Text>
+        </View>
+        <PaymentBar progress={75} />
+        <View style={styles.paymentTypes}>
+          <Text style={styles.paymentTypesText}>Invites Accepted</Text>
+          <Text style={styles.paymentTypesText}>Invites Sent</Text>
+        </View>
+      </View>
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Feather name="plus-circle" size={24} color="white" />
+        <Text style={styles.buttonText}>Invite friends, get $5</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  animeContainer: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1,
-    overflow: "hidden",
-  },
-  blurBackground: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(1, 10, 3, 0.6)",
-    zIndex: 1,
-    overflow: "hidden",
-  },
   container: {
     flex: 1,
     width: "100%",
