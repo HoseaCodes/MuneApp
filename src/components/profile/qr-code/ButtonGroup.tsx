@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
-    shadowColor: "#00000005",
+    shadowColor: "#000000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
-    shadowOpacity: 1,
+    shadowOpacity: 0.1,
     shadowRadius: 1,
     elevation: 1,
   },
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "bold",
   },
   activeText: {
     color: "#3B423D",
