@@ -7,6 +7,9 @@ import QRCodeModal from "../components/profile/qr-code/QRCodeModal";
 
 const ProfileScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  
+  // const type = "member";
+  const type = "profile";
 
   const fadeAnime = useRef(new Animated.Value(0)).current; // Initial opacity value set to 0
 
@@ -26,9 +29,6 @@ const ProfileScreen = () => {
     }
   }, [modalVisible]);
 
-  // const type = "member";
-  const type = "profile";
-  
   return (
     <>
       {modalVisible && (
