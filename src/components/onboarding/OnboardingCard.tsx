@@ -15,7 +15,7 @@ const OnboardingCard = (
         style={styles.background}
         resizeMode={ResizeMode.CONTAIN}
       >
-        {isVideo && (
+        {isVideo ? (
           <Video
             source={backgroundSource as AVPlaybackSource}
             style={styles.background}
@@ -24,51 +24,31 @@ const OnboardingCard = (
             isMuted={true}
             isLooping={true}
           />
-        )}
-        {
-          (!isVideo && activeSection == 1) && (
+        ) : (
+          [1, 3].includes(activeSection) && (
             <>
               <LinearGradient
-                colors={[
-                  'rgba(245, 245, 245, 0.5)', 
-                  '#f5f5f5'
-                ]}
+                colors={['rgba(245, 245, 245, 0.5)', '#f5f5f5']}
                 style={styles.fadeEffect}
               />
               <LinearGradient 
-              colors={[
-                'rgba(245, 245, 245, 0.75)', 
-                'rgba(245, 245, 245, 0.95)', 
-                '#f5f5f5'
-              ]} 
-              style={styles.fadeEffect2} />
-              <View style={styles.creditcard}>
-                <CreditCard />
-              </View>
-            </>
-          )
-        }
-        {
-          (!isVideo && activeSection == 3) && (
-            <>
-              <LinearGradient
                 colors={[
-                  'rgba(245, 245, 245, 0.5)', 
+                  'rgba(245, 245, 245, 0.75)', 
+                  'rgba(245, 245, 245, 0.95)', 
                   '#f5f5f5'
                 ]}
-                style={styles.fadeEffect}
+                style={styles.fadeEffect2}
               />
-              <LinearGradient colors={[
-                'rgba(245, 245, 245, 0.75)', 
-                'rgba(245, 245, 245, 0.95)', 
-                '#f5f5f5'
-                ]} style={styles.fadeEffect2} />
-              <View style={styles.notifications}>
-                <Image alt='notifications' source={require('../../../assets/images/notifications.png')} />
+              <View style={activeSection === 1 ? styles.creditcard : styles.notifications}>
+                {activeSection === 1 ? (
+                  <CreditCard />
+                ) : (
+                  <Image alt="notifications" source={require('../../../assets/images/notifications.png')} />
+                )}
               </View>
             </>
           )
-        }
+        )}
         <View style={styles.overlay1} />
         <View style={styles.blurEffect} />
         <View style={styles.textContainer}>
