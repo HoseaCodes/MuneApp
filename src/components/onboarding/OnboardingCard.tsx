@@ -1,31 +1,37 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, ImageURISource } from 'react-native';
-import { AVPlaybackSource, ResizeMode, Video } from 'expo-av'; 
+import { AVPlaybackSource, ResizeMode, Video } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import CreditCard from '../CreditCard';
 
-
 const OnboardingCard = (
   { backgroundSource, isVideo, activeSection } : 
-  { backgroundSource:  ImageURISource | AVPlaybackSource, isVideo: boolean, activeSection: number }) => {
+  { backgroundSource: ImageURISource | AVPlaybackSource, isVideo: boolean, activeSection: number }) => {
+  
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={backgroundSource as ImageURISource} 
-        style={styles.background}
-        resizeMode={ResizeMode.CONTAIN}
-      >
-        {isVideo ? (
-          <Video
-            source={backgroundSource as AVPlaybackSource}
-            style={styles.background}
-            resizeMode={ResizeMode.COVER}
-            shouldPlay={true}
-            isMuted={true}
-            isLooping={true}
-          />
-        ) : (
-          [1, 3].includes(activeSection) && (
+      {isVideo ? (
+        <Video
+          source={backgroundSource as AVPlaybackSource}
+          style={styles.background}
+          resizeMode={ResizeMode.COVER}
+          shouldPlay={true}
+          isMuted={true}
+          isLooping={true}
+        />
+      ) : (
+        <ImageBackground
+          source={backgroundSource as ImageURISource} 
+          style={[
+            styles.background,
+            { transform: [
+              { scale: 1.2 },
+              { translateY: 60 },
+            ] }
+          ]}
+          resizeMode={ResizeMode.CONTAIN}
+        >
+          {[1, 3].includes(activeSection) && (
             <>
               <LinearGradient
                 colors={['rgba(245, 245, 245, 0.5)', '#f5f5f5']}
@@ -47,15 +53,15 @@ const OnboardingCard = (
                 )}
               </View>
             </>
-          )
-        )}
-        <View style={styles.overlay1} />
-        <View style={styles.blurEffect} />
-        <View style={styles.textContainer}>
-          <Text style={[styles.title, { color: isVideo ? "white" : "#3B423D" }]}>Elevate Your Financial IQ.</Text>
-          <Text style={[styles.subtitle, { color: isVideo ? "white" : "#3B423D" }]}>Stay ahead in your financial journey</Text>
-        </View>
-      </ImageBackground>
+          )}
+        </ImageBackground>
+      )}
+      <View style={styles.overlay1} />
+      <View style={styles.blurEffect} />
+      <View style={styles.textContainer}>
+        <Text style={[styles.title, { color: isVideo ? "white" : "#3B423D" }]}>Elevate Your Financial IQ.</Text>
+        <Text style={[styles.subtitle, { color: isVideo ? "white" : "#3B423D" }]}>Stay ahead in your financial journey</Text>
+      </View>
     </View>
   );
 };
@@ -117,15 +123,15 @@ const styles = StyleSheet.create({
   },
   notifications: {
     position: 'absolute',
-    top: 215,
-    left: 0,
+    top: 195,
+    left: 5,
     width: 250,
     height: 350,
-    transform: [{ scale: 0.9 }],
+    transform: [{ scale: 0.80 }],
   },
   textContainer: {
     position: 'absolute',
-    top: 362,
+    top: 462,
     left: 16,
     width: 314,
     height: 86, 
