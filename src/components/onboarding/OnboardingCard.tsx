@@ -1,23 +1,23 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
-import { ResizeMode, Video } from 'expo-av'; 
+import { View, Text, ImageBackground, StyleSheet, Image, ImageURISource } from 'react-native';
+import { AVPlaybackSource, ResizeMode, Video } from 'expo-av'; 
 import { LinearGradient } from 'expo-linear-gradient';
 import CreditCard from '../CreditCard';
 
 
 const OnboardingCard = (
   { backgroundSource, isVideo, activeSection } : 
-  { backgroundSource: any, isVideo: boolean, activeSection: number }) => {
+  { backgroundSource:  ImageURISource | AVPlaybackSource, isVideo: boolean, activeSection: number }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={isVideo ? null : backgroundSource} 
+        source={backgroundSource as ImageURISource} 
         style={styles.background}
         resizeMode={ResizeMode.CONTAIN}
       >
         {isVideo && (
           <Video
-            source={backgroundSource}
+            source={backgroundSource as AVPlaybackSource}
             style={styles.background}
             resizeMode={ResizeMode.COVER}
             shouldPlay={true}
