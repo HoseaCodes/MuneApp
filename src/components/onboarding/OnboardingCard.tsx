@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     left: 10,
     width: 345,
     height: 549,
-    transform: [{ scale: 0.8 },{ rotate: '-5deg' }],
+    transform: [{ scale: 0.79 },{ rotate: '-5deg' }],
   },
   notifications: {
     position: 'absolute',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     position: 'absolute',
-    top: 462,
+    top: 450,
     left: 16,
     width: 314,
     height: 86, 
