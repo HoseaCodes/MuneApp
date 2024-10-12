@@ -15,11 +15,11 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             isVideo: false,
         },
         {
-            src: require('../../../assets/videos/mun-eprototypevideo desktop.mp4'),
+            src: require('../../../assets/videos/mun-eprototypevideo.mp4'),
             isVideo: true,
         },
         {
-            src: require('../../../assets/images/Mockup.png'),
+            src: require('../../../assets/images/phone.png'),
             isVideo: false,
         }
     ]
@@ -68,6 +68,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             <OnboardingCard
                 backgroundSource={cards[activeSection].src}
                 isVideo={cards[activeSection].isVideo}
+                activeSection={activeSection}
             />
             {/* <Button
                 title="Sign Up"

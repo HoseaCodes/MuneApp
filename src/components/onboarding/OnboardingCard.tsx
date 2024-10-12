@@ -1,17 +1,19 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
 import { ResizeMode, Video } from 'expo-av'; 
 import { LinearGradient } from 'expo-linear-gradient';
 import CreditCard from '../CreditCard';
 
 
-const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, isVideo: boolean }) => {
+const OnboardingCard = (
+  { backgroundSource, isVideo, activeSection } : 
+  { backgroundSource: any, isVideo: boolean, activeSection: number }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
         source={isVideo ? null : backgroundSource} 
         style={styles.background}
-        resizeMode="contain"
+        resizeMode={ResizeMode.CONTAIN}
       >
         {isVideo && (
           <Video
@@ -24,7 +26,7 @@ const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, 
           />
         )}
         {
-          !isVideo && (
+          (!isVideo && activeSection == 1) && (
             <>
               <LinearGradient
                 colors={[
@@ -33,9 +35,36 @@ const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, 
                 ]}
                 style={styles.fadeEffect}
               />
-              <LinearGradient colors={['rgba(245, 245, 245, 0.75)', 'rgba(245, 245, 245, 0.95)', '#f5f5f5']} style={styles.fadeEffect2} />
+              <LinearGradient 
+              colors={[
+                'rgba(245, 245, 245, 0.75)', 
+                'rgba(245, 245, 245, 0.95)', 
+                '#f5f5f5'
+              ]} 
+              style={styles.fadeEffect2} />
               <View style={styles.creditcard}>
                 <CreditCard />
+              </View>
+            </>
+          )
+        }
+        {
+          (!isVideo && activeSection == 3) && (
+            <>
+              <LinearGradient
+                colors={[
+                  'rgba(245, 245, 245, 0.5)', 
+                  '#f5f5f5'
+                ]}
+                style={styles.fadeEffect}
+              />
+              <LinearGradient colors={[
+                'rgba(245, 245, 245, 0.75)', 
+                'rgba(245, 245, 245, 0.95)', 
+                '#f5f5f5'
+                ]} style={styles.fadeEffect2} />
+              <View style={styles.notifications}>
+                <Image source={require('../../../assets/images/notifications.png')} />
               </View>
             </>
           )
@@ -105,6 +134,14 @@ const styles = StyleSheet.create({
     width: 345,
     height: 549,
     transform: [{ scale: 0.8 },{ rotate: '-5deg' }],
+  },
+  notifications: {
+    position: 'absolute',
+    top: 215,
+    left: 0,
+    width: 250,
+    height: 350,
+    transform: [{ scale: 0.9 }],
   },
   textContainer: {
     position: 'absolute',
