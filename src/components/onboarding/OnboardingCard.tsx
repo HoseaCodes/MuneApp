@@ -64,7 +64,7 @@ const OnboardingCard = (
                 '#f5f5f5'
                 ]} style={styles.fadeEffect2} />
               <View style={styles.notifications}>
-                <Image source={require('../../../assets/images/notifications.png')} />
+                <Image alt='notifications' source={require('../../../assets/images/notifications.png')} />
               </View>
             </>
           )
