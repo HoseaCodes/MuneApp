@@ -5,7 +5,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Progressbar from '../components/Progressbar';
 import ContinueButton from '../components/ContinueButton';
 
-const PhoneLoginScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
+const SignupDetailsScreen = ({ nextStep, prevStep, handleInputChange, formData, navigation }) => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
@@ -51,22 +51,41 @@ const PhoneLoginScreen = ({ nextStep, prevStep, handleInputChange, navigation })
                     navigation={navigation}
                 />
                 <View style={styles.inputFields}>
-                    <Text style={styles.label}>Phone Number or Email Address</Text>
+                    <Text style={styles.label}>Full name</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Enter your phone or email"
+                        placeholder="Enter your first and last name"
                         placeholderTextColor="#3B423D"
                         value={email}
                         onChangeText={handleEmailChange}
                         keyboardType="email-address"
                     />
                     {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-
+                    <Text style={styles.label}>Date of birth</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your date of birth"
+                        placeholderTextColor="#3B423D"
+                        value={email}
+                        onChangeText={handleEmailChange}
+                        keyboardType="email-address"
+                    />
+                    {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+                    <Text style={styles.label}>Username</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter your a username"
+                        placeholderTextColor="#3B423D"
+                        value={email}
+                        onChangeText={handleEmailChange}
+                        keyboardType="email-address"
+                    />
+                    {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
                 </View>
             </View>
-            <View style={styles.buttonContainer}>
-                <Progressbar activeSteps={1} />
-                <ContinueButton onPress={() => navigation.navigate('MFA')} />
+            <View>
+                <Progressbar activeSteps={4} />
+                <ContinueButton onPress={() => navigation.navigate('CompletedSignup')} />
             </View>
         </View>
     );
@@ -84,7 +103,8 @@ const styles = StyleSheet.create({
     },
     inputFields: {
         paddingVertical: 60,
-        maxWidth: 345
+        maxWidth: 345,
+        gap: 10,
     },
     label: {
         fontFamily: 'Poppins',
@@ -93,7 +113,7 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         textAlign: 'left',
         color: '#3B423D',
-        marginBottom: 8,
+        marginTop: 8
     },
     input: {
         width: 347,
@@ -126,4 +146,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PhoneLoginScreen;
+export default SignupDetailsScreen;

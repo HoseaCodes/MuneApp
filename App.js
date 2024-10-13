@@ -27,6 +27,9 @@ import OnboardingScreen from "./src/screens/OnboardingScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
+import WelcomeScreen from "./src/screens/WelcomeScreen";
+import SignupDetailsScreen from "./src/screens/SignupDetailsScreen";
+import ChangePassowrdScreen from "./src/screens/ChangePassowrdScreen";
 import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
 import PhoneSignupScreen from "./src/screens/PhoneSignupScreen";
 import MFAScreen from "./src/screens/MFAScreen";
@@ -150,8 +153,11 @@ function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Onboarding">
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
+            <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
+            <Stack.Screen name="CompletedSignup" options={{headerShown: false}} component={WelcomeScreen} />
+            <Stack.Screen name="SignupDetails" options={{headerShown: false}} component={SignupDetailsScreen} />
+            <Stack.Screen name="ChangePassword" options={{headerShown: false}} component={ChangePassowrdScreen} />
+            <Stack.Screen name="PhoneLogin" options={{headerShown: false}} component={PhoneLoginScreen} />
             <Stack.Screen name="PhoneSignup" options={{headerShown: false}}  component={PhoneSignupScreen} />
             <Stack.Screen name="MFA" options={{headerShown: false}} component={MFAScreen} />
             <Stack.Screen name="Signup" options={{headerShown: false}} component={SignUpScreen} />

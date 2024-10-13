@@ -3,8 +3,9 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import Header from '../components/Header';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Progressbar from '../components/Progressbar';
+import ContinueButton from '../components/ContinueButton';
 
-const MFAScreen = ({ navigation }) => {
+const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
     const [otp, setOtp] = useState(['', '', '', '']);
     const inputRefs = useRef([]);
 
@@ -45,7 +46,9 @@ const MFAScreen = ({ navigation }) => {
             <Header
                 title=""
                 IconType={AntDesign}
-                iconLeft='left' iconRight='questioncircleo' />
+                iconLeft='left' iconRight='questioncircleo'
+                navigation={navigation}
+            />
             <View style={styles.firstContainer}>
                 <Text style={styles.verificationText}>Enter Verification Code</Text>
                 <Text style={styles.resendText}>Resend?</Text>
@@ -73,9 +76,7 @@ const MFAScreen = ({ navigation }) => {
                 </View>
             </View>
             <Progressbar activeSteps={2} />
-            <TouchableOpacity style={styles.continueButton}>
-                <Text style={styles.continueButtonText}>Continue</Text>
-            </TouchableOpacity>
+            <ContinueButton onPress={() => navigation.navigate('ChangePassword')} />
         </View>
     );
 };
@@ -156,24 +157,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#949895',
         width: 219,
-    },
-    continueButton: {
-        flex: 0,
-        width: 345,
-        height: 56,
-        borderRadius: 14,
-        backgroundColor: '#19A530',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    continueButtonText: {
-        fontFamily: 'Poppins',
-        fontSize: 16,
-        fontWeight: '700',
-        lineHeight: 24,
-        textAlign: 'center',
-        color: '#F2F7F3',
     },
 });
 

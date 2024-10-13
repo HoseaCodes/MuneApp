@@ -4,7 +4,7 @@ import React from 'react'
 export default function Progressbar({ activeSteps } : { activeSteps: number }) {
   return (
     <View style={styles.progressContainer}>
-        {[...Array(6)].map((_, index) => (
+        {[...Array(5)].map((_, index) => (
         <View
             key={index}
             style={[
@@ -19,12 +19,9 @@ export default function Progressbar({ activeSteps } : { activeSteps: number }) {
 
 const styles = StyleSheet.create({
     progressContainer: {
-        position: 'absolute',
-        top: 665,
-        left: 30,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: 327,
+        width: 345,
         marginTop: 20,
     },
     progressSegment: {

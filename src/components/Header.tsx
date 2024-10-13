@@ -26,17 +26,17 @@ export default function Header({
 }
 
 const styles = StyleSheet.create({
-    header: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 16,
-    },
-    headerText: {
-        fontSize: 20,
-        fontWeight: '700',
-        lineHeight: 30,
-        color: '#3B423D',
-        textAlign: 'center',
-    },
+  header: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingVertical: 16,
+  },
+  headerText: {
+      fontSize: 20,
+      fontWeight: '700',
+      lineHeight: 30,
+      color: '#3B423D',
+      textAlign: 'center',
+  },
 })

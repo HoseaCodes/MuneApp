@@ -1,72 +1,52 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { ResizeMode, Video } from 'expo-av';
-import Svg, { Path } from 'react-native-svg';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { View, StyleSheet } from 'react-native';
+import PhoneSignupScreen from '../../screens/PhoneSignupScreen';
+import MFAScreen from '../../screens/MFAScreen';
+import ChangePassowrdScreen from '../../screens/ChangePassowrdScreen';
+import WelcomeScreen from '../../screens/WelcomeScreen';
+import SignupDetailsScreen from '../../screens/SignupDetailsScreen';
+import SignupComponent from './SignupComponent';
 
 const AuthComponent = ({ navigation, screen } : { navigation: any, screen: string }) => {
-  const videoRef = React.useRef(null);
+  const [step, setStep] = React.useState(1);
+  const [formData, setFormData] = React.useState({
+    method: '',
+    phoneNumber: '',
+    mfaCode: '',
+    password: '',
+    details: {},
+  });
+
+  const nextStep = () => setStep(prev => prev + 1);
+  const prevStep = () => setStep(prev => prev - 1);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const renderSignUpStep = () => {
+    switch (step) {
+      case 1:
+        return <SignupComponent screen={screen} nextStep={nextStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 2:
+        return <PhoneSignupScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 3:
+        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 4:
+        return <ChangePassowrdScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 5:
+        return <SignupDetailsScreen nextStep={nextStep} prevStep={prevStep} formData={formData} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 6:
+        return <WelcomeScreen nextStep={nextStep} prevStep={prevStep} navigation={navigation} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Video
-        ref={videoRef}
-        source={require('../../../assets/videos/black-man-paying-with-credit-card-and-cell-phone-s-2023-11-27-05-33-05-utc.mp4')} // Replace with your video URL
-        style={styles.videoBackground}
-        resizeMode={ResizeMode.COVER}
-        shouldPlay
-        isMuted
-        isLooping
-      />
-      <Image style={styles.logo} source={require('../../../assets/images/logo.png')} />
-      <View style={styles.overlay} />
-
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Svg width="13" height="19" viewBox="0 0 13 19" fill="none">
-          <Path
-            d="M10.6741 18.25L0.933594 9.5L10.6741 0.75L12.3664 2.585L4.39289 9.5L12.3664 16.415L10.6741 18.25Z"
-            fill="#000"
-          />
-        </Svg>
-      </TouchableOpacity>
-
-      <View style={styles.welcomeContainer}>
-        <View style={styles.line} />
-        <Text style={styles.welcomeText}>{screen === "Signup" ? "Get Started" : "Welcome back!" }</Text>
-
-        <View style={styles.buttonsContainer}>
-          <View style={styles.signInButton}>
-            <View style={styles.iconTextContainer}>
-              <View style={styles.icon}>
-                <AntDesign name="google" size={24} color="black" />
-              </View>
-              <Text style={styles.signInText}>{screen === "Signup" ? "Sign up with Google" : "Sign in with Google" }</Text>
-            </View>
-          </View>
-          <View style={styles.signInFacebook}>
-            <View style={styles.iconTextContainer}>
-              <View style={styles.icon}>
-                <FontAwesome name="facebook-f" size={24} color="white" />
-              </View>
-              <Text style={styles.signInDarkText}>{screen === "Signup" ? "Sign up with Facebook" : "Sign in with Facebook" }</Text>
-            </View>
-          </View>
-          <View style={styles.signInApple}>
-            <View style={styles.iconTextContainer}>
-              <View style={styles.icon}>
-                <AntDesign name="apple1" size={24} color="white" />
-              </View>
-              <Text style={styles.signInDarkText}>{screen === "Signup" ? "Sign up with Apple" : "Sign in with Apple" }</Text>
-            </View>
-          </View>
-          <View style={styles.signInPhoneButton}>
-            <TouchableOpacity onPress={screen === "Signup" ? () => navigation.navigate('PhoneSignup') : () => navigation.navigate('PhoneLogin')}>
-                <Text style={styles.signInPhoneText}>{screen === "Signup" ? "Sign up with Phone Number" : "Sign in with Phone Number" }</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      {renderSignUpStep()}
+      {/*  */}
     </View>
   );
 };
@@ -96,7 +76,7 @@ const styles = StyleSheet.create({
     height: 625.83,
     top: 0,
     left: -28.55,
-    backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
   },
   backButton: {
     position: 'absolute',
