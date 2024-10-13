@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
-import OnboardingComponent from "../../components/onboarding/OnboardingComponent";
+import OnboardingComponent from "../components/onboarding/OnboardingComponent";
 
 const OnboardingScreen = ({ navigation }) => {
   return (

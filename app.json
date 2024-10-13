@@ -12,10 +12,15 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "platforms": ["ios", "android"],
     "ios": {
+      "bundleIdentifier": "com.mun-e.test",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.mune.test",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -35,12 +40,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "transformer": {
-      "babelTransformerPath": "react-native-svg-transformer"
-    },
-    "resolver": {
-      "sourceExts": ["js", "json", "ts", "tsx", "jsx", "svg", "png"]
     },
     "extra": {
       "router": {

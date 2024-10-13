@@ -12,7 +12,7 @@ const LoginComponent = ({navigation}: {navigation: any}) => {
     <View style={styles.container}>
       <Video
         ref={videoRef}
-        source={require('../../assets/videos/black-man-paying-with-credit-card-and-cell-phone-s-2023-11-27-05-33-05-utc.mp4')} // Replace with your video URL
+        source={require('../../../assets/videos/black-man-paying-with-credit-card-and-cell-phone-s-2023-11-27-05-33-05-utc.mp4')} // Replace with your video URL
         style={styles.videoBackground}
         resizeMode={ResizeMode.COVER}
         shouldPlay

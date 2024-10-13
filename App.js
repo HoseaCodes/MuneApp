@@ -9,7 +9,7 @@ import {
 import { useFonts } from "expo-font";
 import { BlurView } from "expo-blur";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useColorScheme } from "@/components/useColorScheme";
+import { useColorScheme } from "./src/components/useColorScheme";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppRegistry, Image } from 'react-native';
