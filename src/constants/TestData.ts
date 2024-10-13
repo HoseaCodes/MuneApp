@@ -14,7 +14,7 @@ const getDateThreeDaysAgo = () => {
     {
         "first_name": "Ashley",
         "last_name": "Anderson",
-        "user_image": require('../assets/images/chris.png'),
+        "user_image": require('../../assets/images/chris.png'),
         "date_of_purchase": "2024-04-12",
         "amount": 150.79,
         "made_payment": false,
@@ -41,7 +41,7 @@ const getDateThreeDaysAgo = () => {
     {
         "first_name": "Bryan",
         "last_name": "Cooper",
-        "user_image": require('../assets/images/jerry.png'),
+        "user_image": require('../../assets/images/jerry.png'),
         "date_of_purchase": getDateThreeDaysAgo(),
         "amount": 509.02,
         "made_payment": false, 
@@ -107,7 +107,7 @@ export const usertransactions = [
     {
         "user": {
           "name": "Chris Johnson",
-          "avatar": require('../assets/images/lgChris.png'),
+          "avatar": require('../../assets/images/lgChris.png'),
           "username": "@ChrisJ",
           "createdDate": "January 21, 2025",
           "amount": "$6.00",
@@ -122,7 +122,7 @@ export const userpurchases = [
         "merchant": "Best Buy",
         "date": "January 24, 2024",
         "amount": "$150.87",
-        "image": require('../assets/images/bestbuy.png')
+        "image": require('../../assets/images/bestbuy.png')
     }
 ]
 

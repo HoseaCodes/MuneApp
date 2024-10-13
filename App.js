@@ -9,7 +9,7 @@ import {
 import { useFonts } from "expo-font";
 import { BlurView } from "expo-blur";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useColorScheme } from "@/components/useColorScheme";
+import { useColorScheme } from "./src/components/useColorScheme";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppRegistry, Image } from 'react-native';
@@ -150,11 +150,15 @@ function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Onboarding">
             <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{
-                // Non-clickable logo in the top-left corner
                 headerLeft: () => (<Image
                   source={Mune_Logo}
-                  style={{ width: 127.34, height: 20, marginLeft: 20 }}  // Adjust width, height, and margin as needed
-                />), headerTitle: '',  // Optionally hide the default title
+                  style={{ width: 127.34, height: 20, marginLeft: 20 }}
+                />),
+                headerTitle: '',
+                headerStyle: {
+                  backgroundColor: '#F2F7F3',
+                },
+                headerShadowVisible: false
                 }} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
