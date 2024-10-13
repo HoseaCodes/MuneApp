@@ -69,13 +69,13 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
                 backgroundSource={cards[activeSection].src}
                 isVideo={cards[activeSection].isVideo}
             />
-            {/* <Button
-                title="Sign Up"
-                onPress={() => navigation.navigate('Signup')}
-            /> */}
             <Button
                 title="Log in"
                 onPress={() => navigation.navigate('Login')}
+            />
+            <Button
+                title="Sign up"
+                onPress={() => navigation.navigate('Signup')}
             />
             <Button
                 title="Dashboard"

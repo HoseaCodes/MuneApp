@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ResizeMode, Video } from 'expo-av';
 import Svg, { Path } from 'react-native-svg';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-const LoginComponent = ({navigation}: {navigation: any}) => {
+const AuthComponent = ({ navigation, screen } : { navigation: any, screen: string }) => {
   const videoRef = React.useRef(null);
 
   return (
@@ -19,6 +19,7 @@ const LoginComponent = ({navigation}: {navigation: any}) => {
         isMuted
         isLooping
       />
+      <Image style={styles.logo} source={require('../../../assets/images/logo.png')} />
       <View style={styles.overlay} />
 
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -32,7 +33,7 @@ const LoginComponent = ({navigation}: {navigation: any}) => {
 
       <View style={styles.welcomeContainer}>
         <View style={styles.line} />
-        <Text style={styles.welcomeText}>Welcome back!</Text>
+        <Text style={styles.welcomeText}>{screen === "Signup" ? "Get Started" : "Welcome back!" }</Text>
 
         <View style={styles.buttonsContainer}>
           <View style={styles.signInButton}>
@@ -82,19 +83,26 @@ const styles = StyleSheet.create({
     left: -1,
     borderRadius: 15.99,
   },
+  logo: {
+    position: 'absolute',
+    width: 127,
+    height: 20,
+    top: 93,
+    left: 24,
+  },
   overlay: {
     position: 'absolute',
     width: 470.21,
     height: 625.83,
     top: 0,
     left: -28.55,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.15)',
   },
   backButton: {
     position: 'absolute',
     width: 44,
     height: 44,
-    top: 281,
+    top: 365,
     left: 24,
     padding: 13,
     borderRadius: 14,
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 393,
     height: 405,
-    top: 349,
+    top: 449,
     backgroundColor: '#F2F7F3',
     borderRadius: 36,
     padding: 16,
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     color: '#010A03',
     marginLeft: 25,
-    marginBottom: 16,
+    marginVertical: 4,
   },
   buttonsContainer: {
     marginTop: 20,
@@ -207,4 +215,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginComponent;
+export default AuthComponent;

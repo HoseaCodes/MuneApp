@@ -2,13 +2,13 @@ import React from "react";
 import { View } from "react-native";
 import AuthComponent from "../components/auth/AuthComponent";
 
-const LoginScreen = ({ navigation }) => {
-
+const SignUpScreen = ({ navigation }) => {
+ 
   return (
     <View>
-      <AuthComponent navigation={navigation} />
+      <AuthComponent screen="Signup" navigation={navigation} />
     </View>
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;

@@ -25,7 +25,7 @@ export {
 
 import OnboardingScreen from "./src/screens/OnboardingScreen";
 import LoginScreen from "./src/screens/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
+import SignUpScreen from "./src/screens/SignUpScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
 import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
 import MFAScreen from "./src/screens/MFAScreen";
@@ -123,7 +123,7 @@ function App() {
         <Tab.Screen name="TransactionDetail"  options={{ headerShown: false }}  component={TransactionDetailScreen} />
         <Tab.Screen name="Transfer" component={PhoneLoginScreen} />
         <Tab.Screen name="Money" component={MFAScreen} />
-        <Tab.Screen name="Search" component={RegisterScreen} />
+        <Tab.Screen name="Search" component={SignUpScreen} />
       </Tab.Navigator>
     );
   }  
@@ -152,7 +152,7 @@ function App() {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
             <Stack.Screen name="MFA" component={MFAScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Signup" options={{headerShown: false}} component={SignUpScreen} />
             <Stack.Screen name="TransactionDetails" options={{headerShown: false}} component={TransactionDetailScreen} />
             <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />
             {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
