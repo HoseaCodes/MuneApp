@@ -11,7 +11,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             isVideo: true,
         }, 
         {
-            src: require('../../../assets/images/mockup2.png'),
+            src: require('../../../assets/images/mockupX3.jpg'),
             isVideo: false,
         },
         {
@@ -19,7 +19,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             isVideo: true,
         },
         {
-            src: require('../../../assets/images/phone.png'),
+            src: require('../../../assets/images/phoneX3.jpg'),
             isVideo: false,
         }
     ]
