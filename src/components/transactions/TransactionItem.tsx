@@ -17,7 +17,7 @@ const TransactionItem = ({ avatarUrl, firstName, lastName, purchaseDate, amount,
     return (
         <TouchableOpacity style={styles.cardContainer} accessible={true} accessibilityLabel={`${firstName} ${lastName}`}>
             <View style={styles.avatarContainer}>
-                <Image source={avatarUrl ? avatarUrl : require('../../../assets/images/noImage.png')} style={styles.avatar} />
+                <Image alt='noImage' source={avatarUrl ? avatarUrl : require('../../../assets/images/noImage.png')} style={styles.avatar} />
             </View>
             <View style={styles.userInfo}>
               <Text style={styles.userName}>{firstName} {lastName}</Text>
