@@ -150,7 +150,6 @@ function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Onboarding">
             <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{
-                // Non-clickable logo in the top-left corner
                 headerLeft: () => (<Image
                   source={Mune_Logo}
                   style={{ width: 127.34, height: 20, marginLeft: 20 }}
