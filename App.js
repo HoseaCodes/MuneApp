@@ -12,8 +12,9 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useColorScheme } from "./src/components/useColorScheme";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Image } from 'react-native';
 
+import Mune_Logo from './assets/images/Mune_Logo.png';
 import * as SplashScreen from "expo-splash-screen";
 // import Amplify from "aws-amplify";
 // import config from "./src/aws-exports";
@@ -148,7 +149,17 @@ function App() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Onboarding">
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+            <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{
+                headerLeft: () => (<Image
+                  source={Mune_Logo}
+                  style={{ width: 127.34, height: 20, marginLeft: 20 }}
+                />),
+                headerTitle: '',
+                headerStyle: {
+                  backgroundColor: '#F2F7F3',
+                },
+                headerShadowVisible: false
+                }} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
             <Stack.Screen name="MFA" component={MFAScreen} />

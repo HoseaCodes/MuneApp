@@ -69,7 +69,7 @@ const OnboardingCard = (
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 80,
+    top: 45,
     left: 24,
     width: 345,
     height: 549,
