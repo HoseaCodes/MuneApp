@@ -153,8 +153,13 @@ function App() {
                 // Non-clickable logo in the top-left corner
                 headerLeft: () => (<Image
                   source={Mune_Logo}
-                  style={{ width: 127.34, height: 20, marginLeft: 20 }}  // Adjust width, height, and margin as needed
-                />), headerTitle: '',  // Optionally hide the default title
+                  style={{ width: 127.34, height: 20, marginLeft: 20 }}
+                />),
+                headerTitle: '',
+                headerStyle: {
+                  backgroundColor: '#F2F7F3',
+                },
+                headerShadowVisible: false
                 }} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
