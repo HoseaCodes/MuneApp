@@ -41,7 +41,7 @@ const AuthComponent = ({ navigation, screen } : { navigation: any, screen: strin
               <View style={styles.icon}>
                 <AntDesign name="google" size={24} color="black" />
               </View>
-              <Text style={styles.signInText}>Sign in with Google</Text>
+              <Text style={styles.signInText}>{screen === "Signup" ? "Sign up with Google" : "Sign in with Google" }</Text>
             </View>
           </View>
           <View style={styles.signInFacebook}>
@@ -49,7 +49,7 @@ const AuthComponent = ({ navigation, screen } : { navigation: any, screen: strin
               <View style={styles.icon}>
                 <FontAwesome name="facebook-f" size={24} color="white" />
               </View>
-              <Text style={styles.signInDarkText}>Sign in with Facebook</Text>
+              <Text style={styles.signInDarkText}>{screen === "Signup" ? "Sign up with Facebook" : "Sign in with Facebook" }</Text>
             </View>
           </View>
           <View style={styles.signInApple}>
@@ -57,12 +57,12 @@ const AuthComponent = ({ navigation, screen } : { navigation: any, screen: strin
               <View style={styles.icon}>
                 <AntDesign name="apple1" size={24} color="white" />
               </View>
-              <Text style={styles.signInDarkText}>Sign in with Apple</Text>
+              <Text style={styles.signInDarkText}>{screen === "Signup" ? "Sign up with Apple" : "Sign in with Apple" }</Text>
             </View>
           </View>
           <View style={styles.signInPhoneButton}>
-            <TouchableOpacity onPress={() => navigation.navigate('PhoneLogin')}>
-                <Text style={styles.signInPhoneText}>Sign in with Phone Number</Text>
+            <TouchableOpacity onPress={screen === "Signup" ? () => navigation.navigate('PhoneSignup') : () => navigation.navigate('PhoneLogin')}>
+                <Text style={styles.signInPhoneText}>{screen === "Signup" ? "Sign up with Phone Number" : "Sign in with Phone Number" }</Text>
             </TouchableOpacity>
           </View>
         </View>
