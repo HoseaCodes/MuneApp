@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
         paddingVertical: 60,
         marginHorizontal: 10,
         maxWidth: 345
-
     },
     label: {
         fontFamily: 'Poppins',

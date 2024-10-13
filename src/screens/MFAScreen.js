@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import Header from '../components/Header';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Progressbar from '../components/Progressbar';
 
 const MFAScreen = ({ navigation }) => {
     const [otp, setOtp] = useState(['', '', '', '']);
@@ -39,6 +42,10 @@ const MFAScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Header
+                title=""
+                IconType={AntDesign}
+                iconLeft='left' iconRight='questioncircleo' />
             <View style={styles.firstContainer}>
                 <Text style={styles.verificationText}>Enter Verification Code</Text>
                 <Text style={styles.resendText}>Resend?</Text>
@@ -65,7 +72,7 @@ const MFAScreen = ({ navigation }) => {
                     <Text style={styles.timerText}>50s Remaining</Text>
                 </View>
             </View>
-
+            <Progressbar activeSteps={2} />
             <TouchableOpacity style={styles.continueButton}>
                 <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity>
@@ -80,13 +87,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: '#F2F7F3',
         paddingHorizontal: 23,
-        paddingVertical: 50,
+        paddingVertical: 80,
         height: '100%',
     },
     firstContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 20,
+        paddingVertical: 60,
+        paddingLeft: 30,
     },
     verificationText: {
         fontFamily: 'Poppins',
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
     },
     secondContainer: {
         alignItems: 'center',
-        paddingTop: 150,
+        paddingTop: 20,
         flex: 1,
     },
     otpContainer: {
