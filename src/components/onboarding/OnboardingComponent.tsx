@@ -59,11 +59,11 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             justifyContent: "space-evenly",
             padding: 20,
             alignItems: "center",
-            gap: 20
+            gap: 20,
+            backgroundColor: 'white',
             }}
             {...panResponder.panHandlers}
             >
-            <Text>Logo</Text>
             <ProgressBar activeSection={activeSection + 2} totalSections={cards.length} />
             <OnboardingCard
                 backgroundSource={cards[activeSection].src}
@@ -73,22 +73,26 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
                 title="Sign Up"
                 onPress={() => navigation.navigate('Signup')}
             /> */}
-            <Button
-                title="Log in"
-                onPress={() => navigation.navigate('Login')}
-            />
-            <Button
-                title="Dashboard"
-                onPress={() => navigation.navigate('Dashboard')}
-            />
-            <Button
-                title="TransactionDetails"
-                onPress={() => navigation.navigate('TransactionDetails')}
-            />
-            <Button
-                title="Profile"
-                onPress={() => navigation.navigate('Profile')}
-            />
+            <View style={{ paddingVertical: 40}}>
+                <Button
+
+                    title="Log in"
+                    onPress={() => navigation.navigate('Login')}
+                />
+                <Button
+                    title="Dashboard"
+                    onPress={() => navigation.navigate('Dashboard')}
+                />
+                <Button
+                    title="TransactionDetails"
+                    onPress={() => navigation.navigate('TransactionDetails')}
+                />
+                <Button
+                    title="Profile"
+                    onPress={() => navigation.navigate('Profile')}
+                />
+
+            </View>
         </View>
     )
 }

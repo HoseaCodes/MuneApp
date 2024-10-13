@@ -34,7 +34,7 @@ const OnboardingCard = ({ backgroundSource, isVideo }: { backgroundSource: any, 
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 80,
+    top: 60,
     left: 24,
     width: 345,
     height: 549,
