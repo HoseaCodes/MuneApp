@@ -4,6 +4,7 @@ import { ResizeMode, Video } from 'expo-av';
 import Svg, { Path } from 'react-native-svg';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import LoginWithGoogle from './LoginWithGoogle';
 
 const LoginComponent = ({navigation}: {navigation: any}) => {
   const videoRef = React.useRef(null);
@@ -35,14 +36,16 @@ const LoginComponent = ({navigation}: {navigation: any}) => {
         <Text style={styles.welcomeText}>Welcome back!</Text>
 
         <View style={styles.buttonsContainer}>
-          <View style={styles.signInButton}>
+          {/* <View style={styles.signInButton}>
             <View style={styles.iconTextContainer}>
               <View style={styles.icon}>
                 <AntDesign name="google" size={24} color="black" />
               </View>
               <Text style={styles.signInText}>Sign in with Google</Text>
             </View>
-          </View>
+          </View> */}
+          <LoginWithGoogle navigation={navigation}/>
+
           <View style={styles.signInFacebook}>
             <View style={styles.iconTextContainer}>
               <View style={styles.icon}>

@@ -5,7 +5,8 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "com.mune.muneapp",
+    "owner": "qseanmune",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -13,7 +14,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mune.MuneApp" 
     },
     "android": {
       "adaptiveIcon": {
@@ -23,7 +25,8 @@
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "package": "com.mune.MuneApp"
     },
     "web": {
       "bundler": "metro",
@@ -40,7 +43,15 @@
       "babelTransformerPath": "react-native-svg-transformer"
     },
     "resolver": {
-      "sourceExts": ["js", "json", "ts", "tsx", "jsx", "svg", "png"]
+      "sourceExts": [
+        "js",
+        "json",
+        "ts",
+        "tsx",
+        "jsx",
+        "svg",
+        "png"
+      ]
     },
     "extra": {
       "router": {
