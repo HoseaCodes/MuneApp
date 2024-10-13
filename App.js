@@ -28,6 +28,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
 import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
+import PhoneSignupScreen from "./src/screens/PhoneSignupScreen";
 import MFAScreen from "./src/screens/MFAScreen";
 import TransactionScreen from "./src/screens/TransactionScreen";
 import TransactionDetailScreen from "./src/screens/TransactionDetailScreen";
@@ -151,7 +152,8 @@ function App() {
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
-            <Stack.Screen name="MFA" component={MFAScreen} />
+            <Stack.Screen name="PhoneSignup" options={{headerShown: false}}  component={PhoneSignupScreen} />
+            <Stack.Screen name="MFA" options={{headerShown: false}} component={MFAScreen} />
             <Stack.Screen name="Signup" options={{headerShown: false}} component={SignUpScreen} />
             <Stack.Screen name="TransactionDetails" options={{headerShown: false}} component={TransactionDetailScreen} />
             <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />
