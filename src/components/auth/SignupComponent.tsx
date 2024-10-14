@@ -4,9 +4,16 @@ import { ResizeMode, Video } from 'expo-av';
 import Svg, { Path } from 'react-native-svg';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { NavigationProp } from '@react-navigation/native';
+interface SignupComponentProps {
+  nextStep: () => void;
+  handleInputChange: (input: string, value: string) => void;
+  navigation: NavigationProp<any>;
+  screen: string;
+}
 
-export default function SignupComponent({ nextStep, handleInputChange, navigation, screen}
-    : { nextStep: any, handleInputChange: any, navigation: any, screen: string }) {
+
+export default function SignupComponent({ nextStep, handleInputChange, navigation, screen }: SignupComponentProps) {
     const videoRef = React.useRef(null);
     return (
         <>

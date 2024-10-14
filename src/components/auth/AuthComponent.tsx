@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RouteProp } from '@react-navigation/native';
 import PhoneSignupScreen from '../../screens/auth/PhoneSignupScreen';
 import MFAScreen from '../../screens/auth/MFAScreen';
 import ChangePassowrdScreen from '../../screens/auth/ChangePassowrdScreen';
@@ -8,7 +10,22 @@ import SignupDetailsScreen from '../../screens/auth/SignupDetailsScreen';
 import PhoneLoginScreen from '../../screens/auth/PhoneSignupScreen';
 import SignupComponent from './SignupComponent';
 
-const AuthComponent = ({ navigation, screen } : { navigation: any, screen: string }) => {
+type AuthStackParamList = {
+  Signup: undefined;
+  Login: undefined;
+  MFAScreen: { phoneNumber: string };
+  ChangePasswordScreen: undefined;
+  SignupDetailsScreen: { details: object };
+  WelcomeScreen: undefined;
+};
+
+type AuthComponentProps = {
+  navigation: NativeStackNavigationProp<AuthStackParamList>;
+  route: RouteProp<AuthStackParamList, keyof AuthStackParamList>;
+  screen: string;
+};
+
+const AuthComponent = ({ navigation, screen, route }: AuthComponentProps) => {
   const [step, setStep] = React.useState(1);
   const [formData, setFormData] = React.useState({
     method: '',
@@ -32,7 +49,7 @@ const AuthComponent = ({ navigation, screen } : { navigation: any, screen: strin
       case 2:
         return <PhoneSignupScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
       case 3:
-        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} route={route} />;
       case 4:
         return <ChangePassowrdScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
       case 5:
@@ -51,7 +68,7 @@ const AuthComponent = ({ navigation, screen } : { navigation: any, screen: strin
       case 2:
         return <PhoneLoginScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
       case 3:
-        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} route={route} />;
       default:
         return null;
     }
