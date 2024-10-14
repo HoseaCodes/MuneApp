@@ -13,9 +13,9 @@ export default function CreditCard() {
                 <View style={styles.cardContent}>
                     <View style={styles.cardContainer}>
                         <View style={styles.iconView}>
-                            <Image style={styles.icon} source={require('../../assets/images/block.png')} resizeMode="contain" />
-                            <Image style={styles.icon} source={require('../../assets/images/chain.png')} resizeMode="contain" />
-                            <Image style={styles.icon} source={require('../../assets/images/money.png')} resizeMode="contain" />
+                            <Image alt='block' style={styles.icon} source={require('../../assets/images/block.png')} resizeMode="contain" />
+                            <Image alt='chain' style={styles.icon} source={require('../../assets/images/chain.png')} resizeMode="contain" />
+                            <Image alt='money' style={styles.icon} source={require('../../assets/images/money.png')} resizeMode="contain" />
                         </View>
                         <View>
                             <Feather name="eye-off" size={18} color="#F2F7F3" />

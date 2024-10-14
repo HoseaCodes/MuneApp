@@ -7,22 +7,20 @@ export default function Header({
   iconLeftClickHandler,
   iconRight,
   IconType,
+  navigation
 }: {
   title: string;
   iconLeft: string;
   iconLeftClickHandler?: () => any;
   iconRight: string;
   IconType: any;
+  navigation?: any;
 }) {
   return (
     <View style={styles.header}>
-      {iconLeftClickHandler ? (
-        <TouchableOpacity onPress={iconLeftClickHandler}>
+        <TouchableOpacity onPress={iconLeftClickHandler ? iconLeftClickHandler : () => navigation.goBack()}>
           <IconType name={iconLeft} size={24} color="#3B423D" />
         </TouchableOpacity>
-      ) : (
-        <IconType name={iconLeft} size={24} color="#3B423D" />
-      )}
       <Text style={styles.headerText}>{title}</Text>
       <IconType name={iconRight} size={24} color="#D9D9D9" />
     </View>

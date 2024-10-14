@@ -15,6 +15,7 @@ const UserProfile: React.FC<{
           IconType={Feather}
           iconLeft="chevron-left"
           iconRight="edit"
+          iconLeftClickHandler={() => setModalVisible(true)}
         />
       </View>
       <View style={styles.profileImage}>

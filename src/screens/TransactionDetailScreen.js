@@ -6,7 +6,7 @@ import { BlurView } from 'expo-blur';
 import Header from '../components/Header';
 import { usertransactions, userpurchases, userdetails } from '../constants/TestData';
 
-export default function TransactionDetailScreen() {
+export default function TransactionDetailScreen({ navigation}) {
     const [isModalVisible, setModalVisible] = React.useState(false);
 
     const toggleModal = () => {
@@ -22,10 +22,11 @@ export default function TransactionDetailScreen() {
             )}
             <Header
                 title="Transaction Details"
-                IconType={AntDesign}
+                IconType={AntDesign} navigation={navigation}
                 iconLeft='left' iconRight='questioncircleo' />
             <View style={type === 'purchases' ? styles.userPurchaseContainer: styles.userContainer}>
                 <Image
+                    alt={userName}
                     resizeMode='cover'
                     style={styles.userImage}
                     source={type === 'purchases' ? transactions[0].image : transactions[0].user.avatar} />
@@ -57,6 +58,7 @@ export default function TransactionDetailScreen() {
                 }
                 <TouchableOpacity onPress={toggleModal} style={styles.completedButton}>
                     <Image
+                        alt='check'
                         resizeMode='cover'
                         source={require('../../assets/images/check.png')} />
                     <Text style={styles.completedButtonText}>Completed</Text>
