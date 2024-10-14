@@ -25,7 +25,6 @@ export {
 } from "expo-router";
 
 import OnboardingScreen from "./src/screens/OnboardingScreen";
-import DashboardScreen from "./src/screens/DashboardScreen";
 import LoginScreen from "./src/screens/auth/LoginScreen";
 import SignUpScreen from "./src/screens/auth/SignUpScreen";
 import WelcomeScreen from "./src/screens/auth/WelcomeScreen";
@@ -174,7 +173,6 @@ function App() {
             <Stack.Screen name="Signup" options={{headerShown: false}} component={SignUpScreen} />
             <Stack.Screen name="TransactionDetails" options={{headerShown: false}} component={TransactionDetailScreen} />
             <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />
-            {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
             <Stack.Screen name="Dashboard" options={{ headerShown: false }}  component={Tabs} />
 
           </Stack.Navigator>
