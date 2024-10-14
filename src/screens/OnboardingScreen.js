@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import OnboardingComponent from "../components/onboarding/OnboardingComponent";
 
 const OnboardingScreen = ({ navigation }) => {
@@ -7,10 +7,6 @@ const OnboardingScreen = ({ navigation }) => {
     <View>
       <OnboardingComponent navigation={navigation}>
         <Text>Welcome to Mun-e!</Text>
-        <Button
-          title="Get Started"
-          onPress={() => navigation.navigate("Register")}
-        />
       </OnboardingComponent>
     </View>
   );

@@ -14,9 +14,9 @@ const UserProfile = () => {
           iconLeft='chevron-left' iconRight='edit' />
       </View>
       <View style={styles.profileImage}>
-        <Image source={require('../../../assets/images/profile.png')} style={styles.imageContainer} />
+        <Image alt='profile' source={require('../../../assets/images/profile.png')} style={styles.imageContainer} />
         <View style={styles.qrContainer}>
-          <Image source={require('../../../assets/images/qrcode.png')} style={styles.qrcode} />
+          <Image alt='qrcode' source={require('../../../assets/images/qrcode.png')} style={styles.qrcode} />
         </View>
       </View>
       <View style={styles.userInfoContainer}>

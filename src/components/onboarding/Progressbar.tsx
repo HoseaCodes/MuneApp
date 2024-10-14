@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
 
-const ProgressBar = ({ activeSection, totalSections  }: { activeSection: number, totalSections: number  }) => {
-  const animatedValue = useRef(new Animated.Value(0)).current; 
+const ProgressBar = ({ activeSection, totalSections }: { activeSection: number, totalSections: number }) => {
+  const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(animatedValue, {
@@ -20,6 +20,14 @@ const ProgressBar = ({ activeSection, totalSections  }: { activeSection: number,
     });
   };
 
+  const glowInterpolate = (section: number) => {
+    return animatedValue.interpolate({
+      inputRange: [section - 1, section, section + 1],
+      outputRange: [0, 10, 0],
+      extrapolate: 'clamp',
+    });
+  };
+
   const sectionsArray = Array.from({ length: totalSections }, (_, i) => i + 1);
 
   return (
@@ -30,7 +38,7 @@ const ProgressBar = ({ activeSection, totalSections  }: { activeSection: number,
             style={[
               styles.section,
               {
-                backgroundColor: '#CEE0D0', // Inactive sections color
+                backgroundColor: '#CEE0D0',
               },
             ]}
           />
@@ -38,8 +46,12 @@ const ProgressBar = ({ activeSection, totalSections  }: { activeSection: number,
             style={[
               styles.section,
               {
-                backgroundColor: '#1DBF38', // Active section color
+                backgroundColor: '#1DBF38',
                 opacity: interpolate(section),
+                shadowColor: '#1DBF38',
+                shadowOffset: { width: 0, height: 0 },
+                shadowOpacity: interpolate(section),
+                shadowRadius: glowInterpolate(section),
               },
             ]}
           />

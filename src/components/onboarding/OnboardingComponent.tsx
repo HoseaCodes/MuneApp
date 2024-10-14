@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, Button, PanResponder } from 'react-native';
+import { View, Text, Button, PanResponder, TouchableOpacity, Dimensions } from 'react-native';
 import OnboardingCard from './OnboardingCard'
 import ProgressBar from './Progressbar';
 
 export default function OnboardingComponent({navigation}: {navigation: any}) {
+    const { width } = Dimensions.get("window");
     const [activeSection, setActiveSection] = useState(0);
     const cards = [
         {
@@ -11,15 +12,15 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             isVideo: true,
         }, 
         {
-            src: require('../../../assets/images/iPhone 14 Pro.png'),
+            src: require('../../../assets/images/mockupX3.jpg'),
             isVideo: false,
         },
         {
-            src: require('../../../assets/videos/mun-eprototypevideo desktop.mp4'),
+            src: require('../../../assets/videos/mun-eprototypevideo.mp4'),
             isVideo: true,
         },
         {
-            src: require('../../../assets/images/Mockup.png'),
+            src: require('../../../assets/images/phoneX3.jpg'),
             isVideo: false,
         }
     ]
@@ -59,36 +60,93 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             justifyContent: "space-evenly",
             padding: 20,
             alignItems: "center",
-            gap: 20
+            gap: 20,
+            backgroundColor: '#F2F7F3',
             }}
             {...panResponder.panHandlers}
             >
-            <Text>Logo</Text>
             <ProgressBar activeSection={activeSection + 2} totalSections={cards.length} />
             <OnboardingCard
                 backgroundSource={cards[activeSection].src}
                 isVideo={cards[activeSection].isVideo}
+                activeSection={activeSection}
             />
-            <Button
-                title="Log in"
-                onPress={() => navigation.navigate('Login')}
-            />
-            <Button
-                title="Sign up"
-                onPress={() => navigation.navigate('Signup')}
-            />
-            <Button
-                title="Dashboard"
-                onPress={() => navigation.navigate('Dashboard')}
-            />
-            <Button
-                title="TransactionDetails"
-                onPress={() => navigation.navigate('TransactionDetails')}
-            />
-            <Button
-                title="Profile"
-                onPress={() => navigation.navigate('Profile')}
-            />
+            <View style={{ paddingVertical: 40}}>
+                <Button
+                    title="Sign Up"
+                    onPress={() => navigation.navigate('Signup')}
+                />
+                <Button
+
+                    title="Log in"
+                    onPress={() => navigation.navigate('Login')}
+                />
+                <Button
+                    title="Dashboard"
+                    onPress={() => navigation.navigate('Dashboard')}
+                />
+                <Button
+                    title="TransactionDetails"
+                    onPress={() => navigation.navigate('TransactionDetails')}
+                />
+                <Button
+                    title="Profile"
+                    onPress={() => navigation.navigate('Profile')}
+                />
+
+            </View>
+            <View style={{ position: 'absolute', top: 620 }}>
+                <TouchableOpacity
+                    style={{
+                    backgroundColor: "#19A530",
+                    width: width * 0.78, // Responsive width based on screen width
+                    height: 56,
+                    borderRadius: 14,
+                    justifyContent: "center", // Center text vertically
+                    alignItems: "center", // Center text horizontally
+                    }}
+                    onPress={() => navigation.navigate("Register")}
+                >
+                    <Text
+                    style={{
+                        fontFamily: "Poppins", 
+                        fontSize: 16, 
+                        fontWeight: "700", 
+                        lineHeight: 24,
+                        color: "#FFFFFF",
+                        textAlign: "center",
+                    }}
+                    >
+                    Sign Up
+                    </Text>
+
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                    backgroundColor: "#F2F7F3",
+                    width: width * 0.78, // Responsive width based on screen width
+                    height: 56,
+                    borderRadius: 14,
+                    justifyContent: "center", // Center text vertically
+                    alignItems: "center", // Center text horizontally
+                    }}
+                    onPress={() => navigation.navigate("Register")}
+                >
+                    <Text
+                    style={{
+                        fontFamily: "Poppins", 
+                        fontSize: 16, 
+                        fontWeight: "700", 
+                        lineHeight: 24,
+                        color: "#19A530",
+                        textAlign: "center",
+                    }}
+                    >
+                    Log in
+                    </Text>
+
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }

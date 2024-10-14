@@ -16,9 +16,9 @@ const MemberProfile = () => {
           iconLeft='left' iconRight='questioncircleo' />
       </View>
       <View style={styles.profileImage}>
-        <Image source={require('../../../assets/images/member.png')} style={styles.imageContainer} />
+        <Image alt='member' source={require('../../../assets/images/member.png')} style={styles.imageContainer} />
         <View style={styles.chainContainer}>
-          <Image source={require('../../../assets/images/chain2.png')} style={styles.chain} />
+          <Image alt='chain' source={require('../../../assets/images/chain2.png')} style={styles.chain} />
         </View>
       </View>
       <View style={styles.userInfoContainer}>

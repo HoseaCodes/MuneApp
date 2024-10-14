@@ -12,7 +12,7 @@ const TransactionScreen = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <Text style={styles.title}>Account Info</Text>
-          <Image source={require('../../assets/images/avatar.png')} style={styles.avatar} />
+          <Image alt='avatar' source={require('../../assets/images/avatar.png')} style={styles.avatar} />
         </View>
         <TouchableOpacity
           onPress={() => setShowBalance(!showBalance)}
