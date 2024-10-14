@@ -73,15 +73,6 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
             />
             <View style={{ paddingVertical: 40}}>
                 <Button
-                    title="Sign Up"
-                    onPress={() => navigation.navigate('Signup')}
-                />
-                <Button
-
-                    title="Log in"
-                    onPress={() => navigation.navigate('Login')}
-                />
-                <Button
                     title="Dashboard"
                     onPress={() => navigation.navigate('Dashboard')}
                 />
@@ -105,7 +96,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
                     justifyContent: "center", // Center text vertically
                     alignItems: "center", // Center text horizontally
                     }}
-                    onPress={() => navigation.navigate("Register")}
+                    onPress={() => navigation.navigate("Signup")}
                 >
                     <Text
                     style={{
@@ -130,7 +121,7 @@ export default function OnboardingComponent({navigation}: {navigation: any}) {
                     justifyContent: "center", // Center text vertically
                     alignItems: "center", // Center text horizontally
                     }}
-                    onPress={() => navigation.navigate("Register")}
+                    onPress={() => navigation.navigate("Login")}
                 >
                     <Text
                     style={{
