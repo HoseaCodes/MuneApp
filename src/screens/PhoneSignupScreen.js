@@ -66,7 +66,7 @@ const PhoneLoginScreen = ({ nextStep, prevStep, handleInputChange, navigation })
             </View>
             <View style={styles.buttonContainer}>
                 <Progressbar activeSteps={1} />
-                <ContinueButton onPress={() => navigation.navigate('MFA')} />
+                <ContinueButton onPress={() => navigation.navigate('MFA', {screen: 'signup'})} />
             </View>
         </View>
     );

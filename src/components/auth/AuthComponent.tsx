@@ -6,6 +6,7 @@ import ChangePassowrdScreen from '../../screens/ChangePassowrdScreen';
 import WelcomeScreen from '../../screens/WelcomeScreen';
 import SignupDetailsScreen from '../../screens/SignupDetailsScreen';
 import SignupComponent from './SignupComponent';
+import PhoneLoginScreen from '../../screens/PhoneSignupScreen';
 
 const AuthComponent = ({ navigation, screen } : { navigation: any, screen: string }) => {
   const [step, setStep] = React.useState(1);
@@ -43,10 +44,24 @@ const AuthComponent = ({ navigation, screen } : { navigation: any, screen: strin
     }
   };
 
+  const renderLoginStep = () => {
+    switch (step) {
+      case 1:
+        return <SignupComponent screen={screen} nextStep={nextStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 2:
+        return <PhoneLoginScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      case 3:
+        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+      default:
+        return null;
+    }
+  }
+
   return (
     <View style={styles.container}>
-      {renderSignUpStep()}
-      {/*  */}
+      {
+        screen === 'Signup' ? renderSignUpStep() : renderLoginStep()
+      }
     </View>
   );
 };

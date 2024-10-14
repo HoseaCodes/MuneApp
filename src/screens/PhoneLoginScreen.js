@@ -109,9 +109,9 @@ const PhoneLoginScreen = ({navigation}) => {
                 </View>
             </View>
             <TouchableOpacity style={styles.continueButton}
-                onPress={handleIsFormValid}
-                // onPress={() => navigation.navigate('MFA')}
-                disabled={!isFormValid && !email && !password}
+                // onPress={handleIsFormValid}
+                onPress={() => navigation.navigate('MFA', {screen: 'login'})}
+                // disabled={!isFormValid && !email && !password}
             >
                 <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity>

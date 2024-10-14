@@ -5,7 +5,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Progressbar from '../components/Progressbar';
 import ContinueButton from '../components/ContinueButton';
 
-const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
+const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation, route }) => {
+    const { screen } = route.params || {}; 
     const [otp, setOtp] = useState(['', '', '', '']);
     const inputRefs = useRef([]);
 
@@ -27,7 +28,7 @@ const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
     const handleKeyPress = (e, index) => {
         if (e.nativeEvent.key === 'Backspace') {
             const newOtp = [...otp];
-            
+
             // Clear current input if backspace is pressed
             if (otp[index] !== '') {
                 newOtp[index] = '';
@@ -75,7 +76,7 @@ const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
                     <Text style={styles.timerText}>50s Remaining</Text>
                 </View>
             </View>
-            <Progressbar activeSteps={2} />
+            { screen == 'signup' && ( <Progressbar activeSteps={2} /> ) }
             <ContinueButton onPress={() => navigation.navigate('ChangePassword')} />
         </View>
     );
