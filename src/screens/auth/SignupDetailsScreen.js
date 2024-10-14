@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import Progressbar from '../components/Progressbar';
-import ContinueButton from '../components/ContinueButton';
+import Progressbar from '../../components/Progressbar';
+import ContinueButton from '../../components/ContinueButton';
 
 const SignupDetailsScreen = ({ nextStep, prevStep, handleInputChange, formData, navigation }) => {
     const [email, setEmail] = useState('');

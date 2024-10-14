@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import Progressbar from '../components/Progressbar';
-import ContinueButton from '../components/ContinueButton';
+import Progressbar from '../../components/Progressbar';
+import ContinueButton from '../../components/ContinueButton';
 
 const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation, route }) => {
     const { screen } = route.params || {}; 

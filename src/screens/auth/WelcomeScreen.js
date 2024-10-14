@@ -1,14 +1,14 @@
 import React from 'react'
 import { Image, View, Text, StyleSheet } from 'react-native'
-import Progressbar from '../components/Progressbar';
-import ContinueButton from '../components/ContinueButton';
+import Progressbar from '../../components/Progressbar';
+import ContinueButton from '../../components/ContinueButton';
 
 export default function CompletedSignupScreen({ nextStep, prevStep, navigation }) {
   return (
     <View style={styles.container}>
             <View>
                <Text style={styles.title}>Welcome to</Text>
-               <Image source={require('../../assets/images/green-logo.png')} style={styles.logo} />
+               <Image source={require('../../../assets/images/green-logo.png')} style={styles.logo} />
             </View>
             <View>
               <Progressbar activeSteps={5} />

@@ -25,15 +25,15 @@ export {
 } from "expo-router";
 
 import OnboardingScreen from "./src/screens/OnboardingScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
-import WelcomeScreen from "./src/screens/WelcomeScreen";
-import SignupDetailsScreen from "./src/screens/SignupDetailsScreen";
-import ChangePassowrdScreen from "./src/screens/ChangePassowrdScreen";
-import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
-import PhoneSignupScreen from "./src/screens/PhoneSignupScreen";
-import MFAScreen from "./src/screens/MFAScreen";
+import LoginScreen from "./src/screens/auth/LoginScreen";
+import SignUpScreen from "./src/screens/auth/SignUpScreen";
+import WelcomeScreen from "./src/screens/auth/WelcomeScreen";
+import SignupDetailsScreen from "./src/screens/auth/SignupDetailsScreen";
+import ChangePassowrdScreen from "./src/screens/auth/ChangePassowrdScreen";
+import PhoneLoginScreen from "./src/screens/auth/PhoneLoginScreen";
+import PhoneSignupScreen from "./src/screens/auth/PhoneSignupScreen";
+import MFAScreen from "./src/screens/auth/MFAScreen";
 import TransactionScreen from "./src/screens/TransactionScreen";
 import TransactionDetailScreen from "./src/screens/TransactionDetailScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";

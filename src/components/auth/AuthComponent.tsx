@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import PhoneSignupScreen from '../../screens/PhoneSignupScreen';
-import MFAScreen from '../../screens/MFAScreen';
-import ChangePassowrdScreen from '../../screens/ChangePassowrdScreen';
-import WelcomeScreen from '../../screens/WelcomeScreen';
-import SignupDetailsScreen from '../../screens/SignupDetailsScreen';
+import PhoneSignupScreen from '../../screens/auth/PhoneSignupScreen';
+import MFAScreen from '../../screens/auth/MFAScreen';
+import ChangePassowrdScreen from '../../screens/auth/ChangePassowrdScreen';
+import WelcomeScreen from '../../screens/auth/WelcomeScreen';
+import SignupDetailsScreen from '../../screens/auth/SignupDetailsScreen';
+import PhoneLoginScreen from '../../screens/auth/PhoneSignupScreen';
 import SignupComponent from './SignupComponent';
-import PhoneLoginScreen from '../../screens/PhoneSignupScreen';
 
 const AuthComponent = ({ navigation, screen } : { navigation: any, screen: string }) => {
   const [step, setStep] = React.useState(1);
