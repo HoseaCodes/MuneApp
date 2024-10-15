@@ -18,6 +18,7 @@ const QRCodeModal: React.FC<{
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalView}>
+          <View style={styles.modalBar}/>
           <Header
             title="Mun-e ID"
             IconType={AntDesign}
@@ -37,6 +38,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  modalBar: {
+    width: 50,
+    height: 3,
+    borderRadius: 5,
+    marginHorizontal: "auto",
+    backgroundColor: "#CEE0D0",
+  },
   titleText: {
     fontWeight: "bold",
   },
@@ -46,7 +54,8 @@ const styles = StyleSheet.create({
     gap: 16,
     marginTop: "auto",
     backgroundColor: "#F2F7F3",
-    padding: 20,
+    padding: 30,
+    paddingTop: 14,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     shadowColor: "#000",
