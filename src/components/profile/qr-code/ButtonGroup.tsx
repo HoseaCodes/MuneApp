@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     backgroundColor: "rgba(148, 152, 149, 0.14)",
-    borderRadius: 10,
+    borderRadius: 22,
   },
   activeButton: {
     position: "absolute",
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 10,
+    borderRadius: 14,
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
