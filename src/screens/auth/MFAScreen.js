@@ -1,7 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import Header from '../../components/Header';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Progressbar from '../../components/Progressbar';
+import ContinueButton from '../../components/ContinueButton';
 
-const MFAScreen = ({ navigation }) => {
+const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation, route }) => {
+    const { screen } = route.params || {}; 
     const [otp, setOtp] = useState(['', '', '', '']);
     const inputRefs = useRef([]);
 
@@ -23,7 +28,7 @@ const MFAScreen = ({ navigation }) => {
     const handleKeyPress = (e, index) => {
         if (e.nativeEvent.key === 'Backspace') {
             const newOtp = [...otp];
-            
+
             // Clear current input if backspace is pressed
             if (otp[index] !== '') {
                 newOtp[index] = '';
@@ -39,6 +44,12 @@ const MFAScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Header
+                title=""
+                IconType={AntDesign}
+                iconLeft='left' iconRight='questioncircleo'
+                navigation={navigation}
+            />
             <View style={styles.firstContainer}>
                 <Text style={styles.verificationText}>Enter Verification Code</Text>
                 <Text style={styles.resendText}>Resend?</Text>
@@ -65,10 +76,18 @@ const MFAScreen = ({ navigation }) => {
                     <Text style={styles.timerText}>50s Remaining</Text>
                 </View>
             </View>
-
-            <TouchableOpacity style={styles.continueButton}>
-                <Text style={styles.continueButtonText}>Continue</Text>
-            </TouchableOpacity>
+            {screen === 'signup' ?
+                (
+                    <>
+                        <Progressbar activeSteps={2} />
+                        <ContinueButton onPress={() => navigation.navigate('ChangePassword')} />
+                    </>
+                ) :
+                (
+                    <ContinueButton onPress={() => navigation.navigate('Dashboard')} />
+                )
+            
+            }
         </View>
     );
 };
@@ -80,13 +99,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: '#F2F7F3',
         paddingHorizontal: 23,
-        paddingVertical: 50,
+        paddingVertical: 80,
         height: '100%',
     },
     firstContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 20,
+        paddingVertical: 60,
+        paddingLeft: 30,
     },
     verificationText: {
         fontFamily: 'Poppins',
@@ -110,7 +130,7 @@ const styles = StyleSheet.create({
     },
     secondContainer: {
         alignItems: 'center',
-        paddingTop: 150,
+        paddingTop: 20,
         flex: 1,
     },
     otpContainer: {
@@ -148,24 +168,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#949895',
         width: 219,
-    },
-    continueButton: {
-        flex: 0,
-        width: 345,
-        height: 56,
-        borderRadius: 14,
-        backgroundColor: '#19A530',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    continueButtonText: {
-        fontFamily: 'Poppins',
-        fontSize: 16,
-        fontWeight: '700',
-        lineHeight: 24,
-        textAlign: 'center',
-        color: '#F2F7F3',
     },
 });
 
