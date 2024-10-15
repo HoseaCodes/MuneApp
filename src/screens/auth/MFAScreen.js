@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import Header from '../../components/Header';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Progressbar from '../../components/Progressbar';
@@ -76,8 +76,18 @@ const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation, route })
                     <Text style={styles.timerText}>50s Remaining</Text>
                 </View>
             </View>
-            { screen === 'signup' && ( <Progressbar activeSteps={2} /> ) }
-            <ContinueButton onPress={() => navigation.navigate('ChangePassword')} />
+            {screen === 'signup' ?
+                (
+                    <>
+                        <Progressbar activeSteps={2} />
+                        <ContinueButton onPress={() => navigation.navigate('ChangePassword')} />
+                    </>
+                ) :
+                (
+                    <ContinueButton onPress={() => navigation.navigate('Dashboard')} />
+                )
+            
+            }
         </View>
     );
 };
