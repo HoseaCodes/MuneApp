@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import PhoneSignupScreen from '../../screens/auth/PhoneSignupScreen';
 import MFAScreen from '../../screens/auth/MFAScreen';
-import ChangePassowrdScreen from '../../screens/auth/ChangePassowrdScreen';
+import ChangePasswordScreen from '../../screens/auth/ChangePasswordScreen';
 import WelcomeScreen from '../../screens/auth/WelcomeScreen';
 import SignupDetailsScreen from '../../screens/auth/SignupDetailsScreen';
 import PhoneLoginScreen from '../../screens/auth/PhoneSignupScreen';
@@ -51,7 +51,7 @@ const AuthComponent = ({ navigation, screen, route }: AuthComponentProps) => {
       case 3:
         return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} route={route} />;
       case 4:
-        return screen === 'Signup' && <ChangePassowrdScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+        return screen === 'Signup' && <ChangePasswordScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
       case 5:
         return screen === 'Signup' && <SignupDetailsScreen nextStep={nextStep} prevStep={prevStep} formData={formData} handleInputChange={handleInputChange} navigation={navigation} />;
       case 6:

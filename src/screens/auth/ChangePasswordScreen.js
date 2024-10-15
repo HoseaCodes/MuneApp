@@ -6,7 +6,7 @@ import Progressbar from '../../components/Progressbar';
 import { Ionicons } from '@expo/vector-icons'; 
 import ContinueButton from '../../components/ContinueButton';
 
-const ChangePassowrdScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
+const ChangePasswordScreen = ({ nextStep, prevStep, handleInputChange, navigation }) => {
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [passwordError, setPasswordError] = useState('');
@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ChangePassowrdScreen;
+export default ChangePasswordScreen;

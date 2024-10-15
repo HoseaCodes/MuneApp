@@ -29,7 +29,7 @@ import LoginScreen from "./src/screens/auth/LoginScreen";
 import SignUpScreen from "./src/screens/auth/SignUpScreen";
 import WelcomeScreen from "./src/screens/auth/WelcomeScreen";
 import SignupDetailsScreen from "./src/screens/auth/SignupDetailsScreen";
-import ChangePassowrdScreen from "./src/screens/auth/ChangePassowrdScreen";
+import ChangePasswordScreen from "./src/screens/auth/ChangePasswordScreen";
 import PhoneLoginScreen from "./src/screens/auth/PhoneLoginScreen";
 import PhoneSignupScreen from "./src/screens/auth/PhoneSignupScreen";
 import MFAScreen from "./src/screens/auth/MFAScreen";
@@ -166,7 +166,7 @@ function App() {
             <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
             <Stack.Screen name="CompletedSignup" options={{headerShown: false}} component={WelcomeScreen} />
             <Stack.Screen name="SignupDetails" options={{headerShown: false}} component={SignupDetailsScreen} />
-            <Stack.Screen name="ChangePassword" options={{headerShown: false}} component={ChangePassowrdScreen} />
+            <Stack.Screen name="ChangePassword" options={{headerShown: false}} component={ChangePasswordScreen} />
             <Stack.Screen name="PhoneLogin" options={{headerShown: false}} component={PhoneLoginScreen} />
             <Stack.Screen name="PhoneSignup" options={{headerShown: false}}  component={PhoneSignupScreen} />
             <Stack.Screen name="MFA" options={{headerShown: false}} component={MFAScreen} />
