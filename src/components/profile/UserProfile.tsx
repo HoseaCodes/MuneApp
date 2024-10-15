@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: "#fff",
+    backgroundColor: "#F2F7F3",
     borderColor: "#CEE0D0",
     borderWidth: 2,
     display: "flex",

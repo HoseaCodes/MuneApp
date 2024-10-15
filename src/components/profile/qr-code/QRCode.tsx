@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#F2F7F3",
     borderStyle: "dashed",
     borderWidth: 1,
     borderColor: "#CEE0D0",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   svg: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F2F7F3",
     borderRadius: 20,
     overflow: "hidden",
   },

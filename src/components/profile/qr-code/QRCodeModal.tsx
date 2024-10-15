@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 16,
     marginTop: "auto",
-    backgroundColor: "white",
+    backgroundColor: "#F2F7F3",
     padding: 20,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
