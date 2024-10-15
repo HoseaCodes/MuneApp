@@ -76,7 +76,7 @@ const MFAScreen = ({ nextStep, prevStep, handleInputChange, navigation, route })
                     <Text style={styles.timerText}>50s Remaining</Text>
                 </View>
             </View>
-            { screen == 'signup' && ( <Progressbar activeSteps={2} /> ) }
+            { screen === 'signup' && ( <Progressbar activeSteps={2} /> ) }
             <ContinueButton onPress={() => navigation.navigate('ChangePassword')} />
         </View>
     );
