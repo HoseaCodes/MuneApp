@@ -19,9 +19,9 @@ const QRCode: React.FC<{ userId: number }> = ({ userId }) => (
         color: "#19A530",
       }}
       logo={{
-        href: require("../../../../assets/images/profile.png"),
+        href: require("../../../../assets/images/qr-code-center-logo.png"),
         padding: 6,
-        scale: 1.1,
+        scale: 1,
       }}
     />
   </View>
