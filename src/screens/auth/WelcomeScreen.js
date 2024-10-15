@@ -8,7 +8,7 @@ export default function CompletedSignupScreen({ nextStep, prevStep, navigation }
     <View style={styles.container}>
             <View>
                <Text style={styles.title}>Welcome to</Text>
-               <Image source={require('../../../assets/images/green-logo.png')} style={styles.logo} />
+               <Image source={require('../../../assets/images/logoX3rb.png')} style={styles.logo} />
             </View>
             <View>
               <Progressbar activeSteps={5} />
