@@ -1,22 +1,24 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
 
 export default function Header({
-        title,
-        iconLeft,
-        iconRight,
-        IconType,
-        navigation
-        }: {
-        title: string,
-        iconLeft: string, 
-        iconRight: string, 
-        IconType: any,
-        navigation: any
+  title,
+  iconLeft,
+  iconLeftClickHandler,
+  iconRight,
+  IconType,
+  navigation
+}: {
+  title: string;
+  iconLeft: string;
+  iconLeftClickHandler?: () => any;
+  iconRight: string;
+  IconType: any;
+  navigation?: any;
 }) {
-    return (
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+  return (
+    <View style={styles.header}>
+        <TouchableOpacity onPress={iconLeftClickHandler ? iconLeftClickHandler : () => navigation.goBack()}>
           <IconType name={iconLeft} size={24} color="#3B423D" />
         </TouchableOpacity>
         <Text style={styles.headerText}>{title}</Text>
