@@ -9,11 +9,12 @@ import {
 import { useFonts } from "expo-font";
 import { BlurView } from "expo-blur";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useColorScheme } from "@/components/useColorScheme";
+import { useColorScheme } from "./src/components/useColorScheme";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Image } from 'react-native';
 
+import Mune_Logo from './assets/images/Mune_Logo.png';
 import * as SplashScreen from "expo-splash-screen";
 // import Amplify from "aws-amplify";
 // import config from "./src/aws-exports";
@@ -24,11 +25,14 @@ export {
 } from "expo-router";
 
 import OnboardingScreen from "./src/screens/OnboardingScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
-import DashboardScreen from "./src/screens/DashboardScreen";
-import PhoneLoginScreen from "./src/screens/PhoneLoginScreen";
-import MFAScreen from "./src/screens/MFAScreen";
+import LoginScreen from "./src/screens/auth/LoginScreen";
+import SignUpScreen from "./src/screens/auth/SignUpScreen";
+import WelcomeScreen from "./src/screens/auth/WelcomeScreen";
+import SignupDetailsScreen from "./src/screens/auth/SignupDetailsScreen";
+import ChangePasswordScreen from "./src/screens/auth/ChangePasswordScreen";
+import PhoneLoginScreen from "./src/screens/auth/PhoneLoginScreen";
+import PhoneSignupScreen from "./src/screens/auth/PhoneSignupScreen";
+import MFAScreen from "./src/screens/auth/MFAScreen";
 import TransactionScreen from "./src/screens/TransactionScreen";
 import TransactionDetailScreen from "./src/screens/TransactionDetailScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
@@ -123,7 +127,7 @@ function App() {
         <Tab.Screen name="TransactionDetail"  options={{ headerShown: false }}  component={TransactionDetailScreen} />
         <Tab.Screen name="Transfer" component={PhoneLoginScreen} />
         <Tab.Screen name="Money" component={MFAScreen} />
-        <Tab.Screen name="Search" component={RegisterScreen} />
+        <Tab.Screen name="Search" component={SignUpScreen} />
       </Tab.Navigator>
     );
   }  
@@ -148,14 +152,27 @@ function App() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Onboarding">
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
-            <Stack.Screen name="MFA" component={MFAScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{
+                headerLeft: () => (<Image
+                  source={Mune_Logo}
+                  style={{ width: 127.34, height: 20, marginLeft: 20 }}
+                />),
+                headerTitle: '',
+                headerStyle: {
+                  backgroundColor: '#F2F7F3',
+                },
+                headerShadowVisible: false
+                }} />
+            <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
+            <Stack.Screen name="CompletedSignup" options={{headerShown: false}} component={WelcomeScreen} />
+            <Stack.Screen name="SignupDetails" options={{headerShown: false}} component={SignupDetailsScreen} />
+            <Stack.Screen name="ChangePassword" options={{headerShown: false}} component={ChangePasswordScreen} />
+            <Stack.Screen name="PhoneLogin" options={{headerShown: false}} component={PhoneLoginScreen} />
+            <Stack.Screen name="PhoneSignup" options={{headerShown: false}}  component={PhoneSignupScreen} />
+            <Stack.Screen name="MFA" options={{headerShown: false}} component={MFAScreen} />
+            <Stack.Screen name="Signup" options={{headerShown: false}} component={SignUpScreen} />
             <Stack.Screen name="TransactionDetails" options={{headerShown: false}} component={TransactionDetailScreen} />
             <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />
-            {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
             <Stack.Screen name="Dashboard" options={{ headerShown: false }}  component={Tabs} />
 
           </Stack.Navigator>
