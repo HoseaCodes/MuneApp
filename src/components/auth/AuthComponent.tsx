@@ -42,7 +42,7 @@ const AuthComponent = ({ navigation, screen, route }: AuthComponentProps) => {
     setFormData({ ...formData, [field]: value });
   };
 
-  const renderSignUpStep = () => {
+  const renderAuthSteps = () => {
     switch (step) {
       case 1:
         return <SignupComponent screen={screen} nextStep={nextStep} handleInputChange={handleInputChange} navigation={navigation} />;
@@ -51,34 +51,19 @@ const AuthComponent = ({ navigation, screen, route }: AuthComponentProps) => {
       case 3:
         return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} route={route} />;
       case 4:
-        return <ChangePassowrdScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
+        return screen === 'Signup' && <ChangePassowrdScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
       case 5:
-        return <SignupDetailsScreen nextStep={nextStep} prevStep={prevStep} formData={formData} handleInputChange={handleInputChange} navigation={navigation} />;
+        return screen === 'Signup' && <SignupDetailsScreen nextStep={nextStep} prevStep={prevStep} formData={formData} handleInputChange={handleInputChange} navigation={navigation} />;
       case 6:
-        return <WelcomeScreen nextStep={nextStep} prevStep={prevStep} navigation={navigation} />;
+        return screen === 'Signup' && <WelcomeScreen nextStep={nextStep} prevStep={prevStep} navigation={navigation} />;
       default:
         return null;
     }
   };
 
-  const renderLoginStep = () => {
-    switch (step) {
-      case 1:
-        return <SignupComponent screen={screen} nextStep={nextStep} handleInputChange={handleInputChange} navigation={navigation} />;
-      case 2:
-        return <PhoneLoginScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} />;
-      case 3:
-        return <MFAScreen nextStep={nextStep} prevStep={prevStep} handleInputChange={handleInputChange} navigation={navigation} route={route} />;
-      default:
-        return null;
-    }
-  }
-
   return (
     <View style={styles.container}>
-      {
-        screen === 'Signup' ? renderSignUpStep() : renderLoginStep()
-      }
+      {renderAuthSteps()}
     </View>
   );
 };
