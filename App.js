@@ -36,6 +36,7 @@ import MFAScreen from "./src/screens/auth/MFAScreen";
 import TransactionScreen from "./src/screens/TransactionScreen";
 import TransactionDetailScreen from "./src/screens/TransactionDetailScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import PaymentScreen from "./src/screens/PaymentScreen";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -107,7 +108,7 @@ function App() {
               case 'TransactionDetails':
                 iconName = 'graduation-cap';
                 break;
-              case 'Transfer':
+              case 'Payment':
                 iconName = 'exchange';
                 break;
               case 'Money':
@@ -125,7 +126,7 @@ function App() {
       >
         <Tab.Screen name="Transactions" options={{ headerShown: false }}   component={TransactionScreen} />
         <Tab.Screen name="TransactionDetail"  options={{ headerShown: false }}  component={TransactionDetailScreen} />
-        <Tab.Screen name="Transfer" component={PhoneLoginScreen} />
+        <Tab.Screen name="Payment" component={PaymentScreen} />
         <Tab.Screen name="Money" component={MFAScreen} />
         <Tab.Screen name="Search" component={SignUpScreen} />
       </Tab.Navigator>
@@ -151,7 +152,7 @@ function App() {
     return (
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Onboarding">
+          <Stack.Navigator initialRouteName="Payment">
             <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{
                 headerLeft: () => (<Image
                   source={Mune_Logo}
@@ -174,7 +175,7 @@ function App() {
             <Stack.Screen name="TransactionDetails" options={{headerShown: false}} component={TransactionDetailScreen} />
             <Stack.Screen name="Profile" options={{headerShown: false}} component={ProfileScreen} />
             <Stack.Screen name="Dashboard" options={{ headerShown: false }}  component={Tabs} />
-
+            <Stack.Screen name="Payment" options={{ headerShown: false }}  component={PaymentScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
